@@ -3,6 +3,7 @@ import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
 import { MapView } from "@/components/MapView";
 import { ViewToggle } from "@/components/ViewToggle";
+import { FilterPanel } from "@/components/FilterPanel";
 import type { Property } from "@/types/property";
 
 const MOCK_PROPERTIES: Property[] = [
@@ -274,6 +275,13 @@ const Index = () => {
           </div>
         )}
       </main>
+
+      <FilterPanel 
+        onFilterChange={(filters) => {
+          // TODO: Implement filter logic
+          console.log(filters);
+        }}
+      />
 
       <PropertyModal 
         property={selectedProperty}

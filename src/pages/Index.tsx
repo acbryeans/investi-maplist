@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
-import { Button } from "@/components/ui/button";
-import { MapIcon, ListIcon } from "lucide-react";
+import { MapView } from "@/components/MapView";
+import { ViewToggle } from "@/components/ViewToggle";
 import type { Property } from "@/types/property";
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MOCK_PROPERTIES: Property[] = [
   {
@@ -133,48 +131,13 @@ const MOCK_PROPERTIES: Property[] = [
 const Index = () => {
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-
-  useEffect(() => {
-    if (view === "map" && mapContainer.current && !map.current) {
-      mapboxgl.accessToken = 'pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHNxOXB2NWowMGRqMmpxdDV5Z3E0ZWd2In0.MdhTNHPY6EhKjZnXQm6Kiw';
-      
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v11',
-        center: [-97.7431, 30.2672], // Austin coordinates
-        zoom: 11
-      });
-
-      // Add navigation controls
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    }
-  }, [view]);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">Investment Properties</h1>
-          <div className="flex gap-2">
-            <Button
-              variant={view === "map" ? "default" : "outline"}
-              onClick={() => setView("map")}
-              className="gap-2"
-            >
-              <MapIcon size={16} />
-              Map
-            </Button>
-            <Button
-              variant={view === "list" ? "default" : "outline"}
-              onClick={() => setView("list")}
-              className="gap-2"
-            >
-              <ListIcon size={16} />
-              List
-            </Button>
-          </div>
+          <ViewToggle view={view} onViewChange={setView} />
         </div>
       </header>
 
@@ -189,11 +152,7 @@ const Index = () => {
               />
             </div>
             <div className="flex-1 bg-gray-100 rounded-lg min-h-[calc(100vh-10rem)]">
-              <div 
-                ref={mapContainer} 
-                className="w-full h-full rounded-lg"
-                style={{ minHeight: 'calc(100vh - 10rem)' }}
-              />
+              <MapView />
             </div>
           </div>
         ) : (

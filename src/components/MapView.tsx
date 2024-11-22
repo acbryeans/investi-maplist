@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -15,17 +15,18 @@ export const MapView = () => {
       
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-97.7431, 30.2672], // Austin coordinates
+        style: 'mapbox://styles/mapbox/streets-v12', // Changed from light-v11
+        center: [-97.7431, 30.2672],
         zoom: 11,
-        interactive: true
+        antialias: true // Add this line
+      });
+
+      // Wait for style to load before setting the map reference
+      newMap.on('style.load', () => {
+        map.current = newMap;
       });
 
       newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      
-      newMap.on('load', () => {
-        map.current = newMap;
-      });
     }
 
     // Cleanup function
@@ -41,10 +42,7 @@ export const MapView = () => {
     <div 
       ref={mapContainer} 
       className="w-full h-full rounded-lg"
-      style={{ 
-        minHeight: 'calc(100vh - 10rem)',
-        position: 'relative'
-      }}
+      style={{ minHeight: 'calc(100vh - 10rem)' }}
     />
   );
 };

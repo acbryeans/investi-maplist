@@ -9,4 +9,18 @@ export interface Property {
   capRate: number;
   cashOnCash: number;
   tags: string[];
+  rentEstimate: number;
+  repairsEstimate: number;
+  financing: {
+    downPayment: number;
+    interestRate: number;
+    monthlyPayment: number;
+  };
+  yearlyAppreciation: number;
+  comps: Array<{
+    address: string;
+    price: number;
+    sqft: number;
+    soldDate: string;
+  }>;
 }

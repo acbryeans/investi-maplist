@@ -1,19 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ChartIcon } from "lucide-react";
+import type { Property } from "@/types/property";
 
 interface PropertyCardProps {
-  property: {
-    id: string;
-    image: string;
-    price: number;
-    address: string;
-    beds: number;
-    baths: number;
-    sqft: number;
-    capRate: number;
-    cashOnCash: number;
-    tags: string[];
-  };
+  property: Property;
   onClick: (id: string) => void;
 }
 
@@ -25,7 +17,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
 
   return (
     <Card 
-      className="property-card flex h-48 animate-fade-in"
+      className="property-card flex h-48 animate-fade-in relative"
       onClick={() => onClick(property.id)}
     >
       <div className="w-1/3">
@@ -65,13 +57,28 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
               <Badge 
                 key={tag}
                 variant="secondary"
-                className="investment-tag"
+                className={`text-sm py-1 ${
+                  tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                  tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                  tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
+                  tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                  ""
+                }`}
               >
                 {tag}
               </Badge>
             ))}
           </div>
         </div>
+
+        <Button 
+          className="absolute bottom-4 right-4 gap-2"
+          size="sm"
+          variant="outline"
+        >
+          <ChartIcon size={16} />
+          Analyze
+        </Button>
       </div>
     </Card>
   );

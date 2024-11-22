@@ -17,6 +17,34 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 5.8,
     cashOnCash: 8.2,
     tags: ["High Growth Market", "Value-Buy"],
+    rentEstimate: 4200,
+    repairsEstimate: 15000,
+    financing: {
+      downPayment: 150000,
+      interestRate: 6.5,
+      monthlyPayment: 3800,
+    },
+    yearlyAppreciation: 8.5,
+    comps: [
+      {
+        address: "125 Investment Ave",
+        price: 765000,
+        sqft: 2450,
+        soldDate: "2024-01-15",
+      },
+      {
+        address: "121 Investment Ave",
+        price: 742000,
+        sqft: 2550,
+        soldDate: "2024-01-02",
+      },
+      {
+        address: "127 Investment Ave",
+        price: 758000,
+        sqft: 2480,
+        soldDate: "2023-12-28",
+      },
+    ],
   },
   {
     id: "2",

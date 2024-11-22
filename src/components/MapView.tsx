@@ -26,13 +26,7 @@ export const MapView = () => {
       try {
         const newMap = await new Promise<mapboxgl.Map>((resolve) => {
           const mapInstance = new mapboxgl.Map(mapConfig);
-          mapInstance.on('load', () => {
-            console.log('Map loaded successfully');
-            resolve(mapInstance);
-          });
-          mapInstance.on('error', (e) => {
-            console.error('Mapbox error:', e);
-          });
+          mapInstance.on('load', () => resolve(mapInstance));
         });
 
         // Add controls after map is loaded

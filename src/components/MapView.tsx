@@ -15,13 +15,17 @@ export const MapView = () => {
       
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [-97.7431, 30.2672], // Austin coordinates
-        zoom: 11
+        zoom: 11,
+        interactive: true
       });
 
       newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      map.current = newMap;
+      
+      newMap.on('load', () => {
+        map.current = newMap;
+      });
     }
 
     // Cleanup function
@@ -37,7 +41,10 @@ export const MapView = () => {
     <div 
       ref={mapContainer} 
       className="w-full h-full rounded-lg"
-      style={{ minHeight: 'calc(100vh - 10rem)' }}
+      style={{ 
+        minHeight: 'calc(100vh - 10rem)',
+        position: 'relative'
+      }}
     />
   );
 };

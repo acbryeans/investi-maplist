@@ -22,11 +22,11 @@ export const MapView = ({ isMobile }: MapViewProps) => {
   };
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "YOUR_API_KEY"
+    googleMapsApiKey: "AIzaSyDbn0muf9rXTgntcptHwRipFEn_QtTQeIg"
   });
 
-  if (loadError) return <div>Error loading maps</div>;
-  if (!isLoaded) return <div>Loading maps...</div>;
+  if (loadError) return <div className="w-full h-full flex items-center justify-center text-red-500">Error loading maps</div>;
+  if (!isLoaded) return <div className="w-full h-full flex items-center justify-center">Loading maps...</div>;
 
   return (
     <GoogleMap

@@ -21,30 +21,35 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
           className="bg-white hover:bg-gray-50 transition-colors cursor-pointer border rounded-lg"
         >
           {view === "map" ? (
-            // Card view for map layout
-            <div className="flex h-24">
-              <div className="w-32">
+            // Card view for map layout - doubled height and adjusted spacing
+            <div className="flex h-48">
+              <div className="w-64">
                 <img 
                   src={property.image} 
                   alt={property.address}
                   className="h-full w-full object-cover rounded-l-lg"
                 />
               </div>
-              <div className="flex-1 p-3">
+              <div className="flex-1 p-6">
                 <div className="flex justify-between items-start">
                   <div>
-                    <div className="font-semibold text-primary">
+                    <div className="font-semibold text-primary text-2xl">
                       {formatPrice(property.price)}
                     </div>
-                    <div className="text-sm text-gray-600 truncate">
+                    <div className="text-base text-gray-600 truncate mt-2">
                       {property.address}
                     </div>
+                    <div className="flex gap-4 mt-4 text-base text-gray-500">
+                      <span>{property.beds} beds</span>
+                      <span>{property.baths} baths</span>
+                      <span>{property.sqft.toLocaleString()} sqft</span>
+                    </div>
                   </div>
-                  <div className="text-right text-sm">
-                    <div className="text-primary font-medium">
+                  <div className="text-right">
+                    <div className="text-primary font-medium text-lg">
                       Cap Rate: {formatPercent(property.capRate)}
                     </div>
-                    <div className="text-primary-dark">
+                    <div className="text-primary-dark text-lg mt-1">
                       CoC: {formatPercent(property.cashOnCash)}
                     </div>
                   </div>
@@ -52,7 +57,7 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
               </div>
             </div>
           ) : (
-            // Row view for list layout
+            // Row view for list layout - keeping original dimensions
             <div className="flex items-center h-16 px-4">
               <div className="w-16 h-12">
                 <img 

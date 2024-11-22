@@ -31,9 +31,8 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                 />
               </div>
               <div className="flex-1 p-6">
-                <div className="flex flex-col h-full">
-                  {/* Top section: Price, Address, Details */}
-                  <div>
+                <div className="flex flex-col">
+                  <div className="mb-4">
                     <div className="font-semibold text-primary text-3xl mb-2">
                       {formatPrice(property.price)}
                     </div>
@@ -47,8 +46,7 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                     </div>
                   </div>
 
-                  {/* Middle section: Investment Metrics */}
-                  <div className="flex gap-6 mt-4">
+                  <div className="flex gap-8 mb-4">
                     <div>
                       <div className="text-sm text-gray-500">Cap Rate</div>
                       <div className="text-xl font-semibold text-primary">
@@ -63,13 +61,12 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                     </div>
                   </div>
 
-                  {/* Bottom section: Tags */}
-                  <div className="flex gap-2 flex-wrap mt-4">
-                    {property.tags.map((tag) => (
+                  <div className="flex gap-2 flex-wrap">
+                    {property.tags?.map((tag) => (
                       <Badge 
                         key={tag}
                         variant="secondary"
-                        className={`text-sm py-1 ${
+                        className={`text-sm py-1 px-3 ${
                           tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                           tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                           tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
@@ -85,7 +82,6 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
               </div>
             </div>
           ) : (
-            // Keep existing list view code
             <div className="flex items-center h-16 px-4">
               <div className="w-16 h-12">
                 <img 

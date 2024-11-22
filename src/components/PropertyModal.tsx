@@ -8,9 +8,10 @@ interface PropertyModalProps {
   property: Property | null;
   isOpen: boolean;
   onClose: () => void;
+  isMobile?: boolean;
 }
 
-export const PropertyModal = ({ property, isOpen, onClose }: PropertyModalProps) => {
+export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyModalProps) => {
   if (!property) return null;
 
   const formatPrice = (price: number) => 
@@ -20,8 +21,8 @@ export const PropertyModal = ({ property, isOpen, onClose }: PropertyModalProps)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl h-[90vh] overflow-y-auto">
-        <div className="grid grid-cols-2 gap-8">
+      <DialogContent className={`${isMobile ? 'w-full h-full max-w-none m-0 rounded-none' : 'max-w-4xl h-[90vh]'} overflow-y-auto`}>
+        <div className={`${isMobile ? 'flex flex-col' : 'grid grid-cols-2'} gap-8`}>
           <div>
             <img 
               src={property.image} 

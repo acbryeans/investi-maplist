@@ -1,14 +1,15 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { ChevronLeft } from "lucide-react";
+import { ChevronDown, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
 interface FilterPanelProps {
   onFilterChange?: (filters: any) => void;
+  isMobile?: boolean;
 }
 
-export const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
+export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
   const [strategy, setStrategy] = useState<'cashflow' | 'appreciation' | 'custom'>('custom');
   const [investmentType, setInvestmentType] = useState<'cash' | 'downpayment'>('cash');
   
@@ -17,13 +18,27 @@ export const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
       <SheetTrigger asChild>
         <Button 
           variant="outline" 
-          className="fixed right-0 top-1/2 -translate-y-1/2 h-32 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg"
+          className={`${isMobile 
+            ? 'fixed top-0 left-1/2 -translate-x-1/2 rounded-t-none rounded-b-lg border-t-0 z-50 bg-white shadow-lg px-4 py-2' 
+            : 'fixed right-0 top-1/2 -translate-y-1/2 h-32 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
         >
-          <ChevronLeft className="h-4 w-4 mr-2" />
-          <span className="rotate-90">Filters</span>
+          {isMobile ? (
+            <>
+              <ChevronDown className="h-4 w-4 mr-2" />
+              <span>Filters</span>
+            </>
+          ) : (
+            <>
+              <ChevronLeft className="h-4 w-4 mr-2" />
+              <span className="rotate-90">Filters</span>
+            </>
+          )}
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[400px] sm:w-[540px] overflow-y-auto">
+      <SheetContent 
+        side={isMobile ? "top" : "right"} 
+        className={`w-full ${isMobile ? 'h-[80vh]' : 'sm:w-[540px]'} overflow-y-auto`}
+      >
         <div className="h-full flex flex-col gap-6 pt-6">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Investment Strategy</h3>

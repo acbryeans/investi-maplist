@@ -1,10 +1,8 @@
 import { useLoadScript, GoogleMap } from '@react-google-maps/api';
 
-const mapContainerStyle = {
-  width: '100%',
-  height: 'calc(100vh - 10rem)',
-  borderRadius: '0.5rem'
-};
+interface MapViewProps {
+  isMobile?: boolean;
+}
 
 const center = {
   lat: 30.2672,
@@ -16,9 +14,15 @@ const options = {
   zoomControl: true,
 };
 
-export const MapView = () => {
+export const MapView = ({ isMobile }: MapViewProps) => {
+  const mapContainerStyle = {
+    width: '100%',
+    height: isMobile ? '100%' : 'calc(100vh - 10rem)',
+    borderRadius: isMobile ? '0' : '0.5rem'
+  };
+
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDbn0muf9rXTgntcptHwRipFEn_QtTQeIg" // Replace with your API key
+    googleMapsApiKey: "YOUR_API_KEY"
   });
 
   if (loadError) return <div>Error loading maps</div>;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -11,22 +11,17 @@ export const MapView = () => {
 
     // Initialize map only once
     if (!map.current) {
-      mapboxgl.accessToken = 'pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHNxOXB2NWowMGRqMmpxdDV5Z3E0ZWd2In0.MdhTNHPY6EhKjZnXQm6Kiw';
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYXVzaXRuYnJ5ZWFucyIsImEiOiJjTN0MDk1cmgwM2x6Mmlvc2w3aDk5enYxIn0.d1mm9bIdw5zbL6_gLBRk8Q';
       
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v12', // Changed from light-v11
-        center: [-97.7431, 30.2672],
-        zoom: 11,
-        antialias: true // Add this line
-      });
-
-      // Wait for style to load before setting the map reference
-      newMap.on('style.load', () => {
-        map.current = newMap;
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-97.7431, 30.2672], // Austin coordinates
+        zoom: 11
       });
 
       newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      map.current = newMap;
     }
 
     // Cleanup function

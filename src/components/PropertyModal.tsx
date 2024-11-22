@@ -2,7 +2,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/types/property";
-import { ChartIcon } from "lucide-react";
+import { BarChart2 } from "lucide-react";
 
 interface PropertyModalProps {
   property: Property | null;
@@ -110,7 +110,7 @@ export const PropertyModal = ({ property, isOpen, onClose }: PropertyModalProps)
               className="absolute bottom-0 right-0 gap-2"
               size="lg"
             >
-              <ChartIcon size={18} />
+              <BarChart2 size={18} />
               Analyze
             </Button>
           </div>

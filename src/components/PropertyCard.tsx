@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChartIcon } from "lucide-react";
+import { BarChart2 } from "lucide-react";
 import type { Property } from "@/types/property";
 
 interface PropertyCardProps {
@@ -76,7 +76,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           size="sm"
           variant="outline"
         >
-          <ChartIcon size={16} />
+          <BarChart2 size={16} />
           Analyze
         </Button>
       </div>

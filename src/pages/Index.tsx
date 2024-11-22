@@ -57,6 +57,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 7.2,
     cashOnCash: 9.5,
     tags: ["Cashflow", "Below Market"],
+    rentEstimate: 3000,
+    repairsEstimate: 5000,
+    financing: {
+      downPayment: 110000,
+      interestRate: 6,
+      monthlyPayment: 2500,
+    },
+    yearlyAppreciation: 5,
+    comps: [],
   },
   {
     id: "3",
@@ -69,6 +78,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 4.9,
     cashOnCash: 7.1,
     tags: ["Luxury", "Appreciation"],
+    rentEstimate: 6000,
+    repairsEstimate: 20000,
+    financing: {
+      downPayment: 178000,
+      interestRate: 6.5,
+      monthlyPayment: 5300,
+    },
+    yearlyAppreciation: 6,
+    comps: [],
   },
   {
     id: "4",
@@ -81,6 +99,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 8.1,
     cashOnCash: 11.2,
     tags: ["High Yield", "Starter"],
+    rentEstimate: 2800,
+    repairsEstimate: 3000,
+    financing: {
+      downPayment: 84000,
+      interestRate: 6.5,
+      monthlyPayment: 2000,
+    },
+    yearlyAppreciation: 7,
+    comps: [],
   },
   {
     id: "5",
@@ -93,6 +120,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 6.3,
     cashOnCash: 8.9,
     tags: ["Family Friendly", "Good Schools"],
+    rentEstimate: 3900,
+    repairsEstimate: 10000,
+    financing: {
+      downPayment: 135000,
+      interestRate: 6.5,
+      monthlyPayment: 3600,
+    },
+    yearlyAppreciation: 6.5,
+    comps: [],
   },
   {
     id: "6",
@@ -105,6 +141,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 7.5,
     cashOnCash: 10.1,
     tags: ["Up and Coming", "High Demand"],
+    rentEstimate: 3200,
+    repairsEstimate: 4000,
+    financing: {
+      downPayment: 99000,
+      interestRate: 6.5,
+      monthlyPayment: 2700,
+    },
+    yearlyAppreciation: 9,
+    comps: [],
   },
   {
     id: "7",
@@ -117,6 +162,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 5.2,
     cashOnCash: 7.8,
     tags: ["Premium Location", "Pool"],
+    rentEstimate: 6500,
+    repairsEstimate: 25000,
+    financing: {
+      downPayment: 185000,
+      interestRate: 6.5,
+      monthlyPayment: 5600,
+    },
+    yearlyAppreciation: 6,
+    comps: [],
   },
   {
     id: "8",
@@ -129,6 +183,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 8.7,
     cashOnCash: 12.3,
     tags: ["High Cap Rate", "Rental Demand"],
+    rentEstimate: 2000,
+    repairsEstimate: 2000,
+    financing: {
+      downPayment: 76000,
+      interestRate: 6.5,
+      monthlyPayment: 1600,
+    },
+    yearlyAppreciation: 7.5,
+    comps: [],
   },
   {
     id: "9",
@@ -141,6 +204,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 6.1,
     cashOnCash: 8.5,
     tags: ["Modern", "Energy Efficient"],
+    rentEstimate: 3900,
+    repairsEstimate: 12000,
+    financing: {
+      downPayment: 144000,
+      interestRate: 6.5,
+      monthlyPayment: 3500,
+    },
+    yearlyAppreciation: 6,
+    comps: [],
   },
   {
     id: "10",
@@ -153,6 +225,15 @@ const MOCK_PROPERTIES: Property[] = [
     capRate: 5.5,
     cashOnCash: 7.9,
     tags: ["Gated Community", "Investment Ready"],
+    rentEstimate: 5000,
+    repairsEstimate: 15000,
+    financing: {
+      downPayment: 170000,
+      interestRate: 6.5,
+      monthlyPayment: 4800,
+    },
+    yearlyAppreciation: 5.5,
+    comps: [],
   },
 ];
 

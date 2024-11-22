@@ -31,12 +31,12 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                 />
               </div>
               <div className="flex-1 p-6">
-                <div className="flex flex-col">
-                  <div className="mb-4">
-                    <div className="font-semibold text-primary text-3xl mb-2">
+                <div className="flex flex-col h-full">
+                  <div className="mb-3">
+                    <div className="font-semibold text-primary text-3xl mb-1">
                       {formatPrice(property.price)}
                     </div>
-                    <div className="text-lg text-gray-600 mb-3">
+                    <div className="text-lg text-gray-600 mb-1">
                       {property.address}
                     </div>
                     <div className="flex gap-6 text-base text-gray-500">
@@ -46,7 +46,7 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                     </div>
                   </div>
 
-                  <div className="flex gap-8 mb-4">
+                  <div className="flex gap-8 mb-2">
                     <div>
                       <div className="text-sm text-gray-500">Cap Rate</div>
                       <div className="text-xl font-semibold text-primary">
@@ -71,7 +71,8 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                           tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                           tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
                           tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                          ""
+                          tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                          "bg-gray-100 text-gray-800"
                         }`}
                       >
                         {tag}

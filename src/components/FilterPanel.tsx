@@ -17,7 +17,7 @@ export const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
       <SheetTrigger asChild>
         <Button 
           variant="outline" 
-          className="fixed right-0 top-1/2 -translate-y-1/2 h-32 px-2 rounded-l-lg rounded-r-none border-r-0"
+          className="fixed right-0 top-1/2 -translate-y-1/2 h-32 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg"
         >
           <ChevronLeft className="h-4 w-4 mr-2" />
           <span className="rotate-90">Filters</span>

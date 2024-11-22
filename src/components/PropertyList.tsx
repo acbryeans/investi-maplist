@@ -21,8 +21,8 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
           className="bg-white hover:bg-gray-50 transition-colors cursor-pointer border rounded-lg"
         >
           {view === "map" ? (
-            // Card view for map layout - doubled height and adjusted spacing
-            <div className="flex h-48">
+            // Card view for map layout - significantly increased height
+            <div className="flex h-[calc(25vh-1rem)]">
               <div className="w-64">
                 <img 
                   src={property.image} 
@@ -33,23 +33,23 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
               <div className="flex-1 p-6">
                 <div className="flex justify-between items-start">
                   <div>
-                    <div className="font-semibold text-primary text-2xl">
+                    <div className="font-semibold text-primary text-3xl">
                       {formatPrice(property.price)}
                     </div>
-                    <div className="text-base text-gray-600 truncate mt-2">
+                    <div className="text-xl text-gray-600 truncate mt-3">
                       {property.address}
                     </div>
-                    <div className="flex gap-4 mt-4 text-base text-gray-500">
+                    <div className="flex gap-6 mt-6 text-lg text-gray-500">
                       <span>{property.beds} beds</span>
                       <span>{property.baths} baths</span>
                       <span>{property.sqft.toLocaleString()} sqft</span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-primary font-medium text-lg">
+                    <div className="text-primary font-medium text-xl">
                       Cap Rate: {formatPercent(property.capRate)}
                     </div>
-                    <div className="text-primary-dark text-lg mt-1">
+                    <div className="text-primary-dark text-xl mt-2">
                       CoC: {formatPercent(property.cashOnCash)}
                     </div>
                   </div>

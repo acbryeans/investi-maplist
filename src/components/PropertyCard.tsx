@@ -17,7 +17,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
 
   return (
     <Card 
-      className="property-card flex h-48 animate-fade-in relative"
+      className="property-card flex h-96 animate-fade-in relative"
       onClick={() => onClick(property.id)}
     >
       <div className="w-1/3">
@@ -27,28 +27,28 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           className="h-full w-full object-cover rounded-l-lg"
         />
       </div>
-      <div className="w-2/3 p-4 flex flex-col justify-between">
+      <div className="w-2/3 p-6">
         <div>
-          <h3 className="text-2xl font-semibold text-primary">
+          <h3 className="text-3xl font-semibold text-primary">
             {formatPrice(property.price)}
           </h3>
-          <p className="text-sm text-gray-600 mt-1">{property.address}</p>
-          <div className="flex gap-4 mt-2 text-sm text-gray-500">
+          <p className="text-lg text-gray-600 mt-2">{property.address}</p>
+          <div className="flex gap-6 mt-4 text-base text-gray-500">
             <span>{property.beds} beds</span>
             <span>{property.baths} baths</span>
             <span>{property.sqft.toLocaleString()} sqft</span>
           </div>
         </div>
         
-        <div className="mt-4">
-          <div className="flex gap-4 mb-3">
+        <div className="mt-8">
+          <div className="flex gap-6 mb-4">
             <div>
-              <div className="text-xs text-gray-500">Cap Rate</div>
-              <div className="font-semibold">{formatPercent(property.capRate)}</div>
+              <div className="text-sm text-gray-500">Cap Rate</div>
+              <div className="text-xl font-semibold">{formatPercent(property.capRate)}</div>
             </div>
             <div>
-              <div className="text-xs text-gray-500">Cash on Cash</div>
-              <div className="font-semibold">{formatPercent(property.cashOnCash)}</div>
+              <div className="text-sm text-gray-500">Cash on Cash</div>
+              <div className="text-xl font-semibold">{formatPercent(property.cashOnCash)}</div>
             </div>
           </div>
           
@@ -57,7 +57,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
               <Badge 
                 key={tag}
                 variant="secondary"
-                className={`text-sm py-1 ${
+                className={`text-base py-1.5 px-3 ${
                   tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                   tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                   tag === "Cashflow" ? "bg-purple-100 text-purple-800" :

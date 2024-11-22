@@ -244,42 +244,41 @@ const Index = () => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  useEffect(() => {
-    if (isMobile) {
-      setView("map");
-    }
-  }, [isMobile]);
-
   return (
-    <div className="min-h-screen bg-gray-50 relative">
-      <header className="bg-white border-b">
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b fixed top-0 left-0 right-0 z-10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary">Investment Properties</h1>
-          <ViewToggle view={view} onViewChange={setView} />
+          <h1 className="text-xl md:text-2xl font-bold text-primary">Investment Properties</h1>
+          <ViewToggle view={view} onViewChange={setView} isMobile={isMobile} />
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="pt-[4.5rem]">
         {view === "map" ? (
-          <div className={`flex ${isMobile ? 'flex-col' : 'gap-8'}`}>
-            <div className={`${isMobile ? 'hidden' : 'w-[600px]'}`}>
+          <div className="relative h-[calc(100vh-4.5rem)]">
+            <div className={`${isMobile ? 'w-full h-full' : 'flex gap-8 container mx-auto px-4 py-8'}`}>
+              <div className={`${isMobile ? 'hidden' : 'w-[600px]'}`}>
+                <PropertyList 
+                  properties={MOCK_PROPERTIES} 
+                  onPropertyClick={setSelectedProperty}
+                  view={view}
+                />
+              </div>
+              <div className={`${isMobile ? 'w-full h-full' : 'flex-1'}`}>
+                <MapView isMobile={isMobile} />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="container mx-auto px-4 py-8">
+            <div className="bg-white rounded-lg shadow p-4">
               <PropertyList 
                 properties={MOCK_PROPERTIES} 
                 onPropertyClick={setSelectedProperty}
                 view={view}
+                isMobile={isMobile}
               />
             </div>
-            <div className={`${isMobile ? 'h-[calc(100vh-8rem)]' : 'flex-1'} bg-gray-100 rounded-lg min-h-[calc(100vh-10rem)]`}>
-              <MapView />
-            </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow p-4">
-            <PropertyList 
-              properties={MOCK_PROPERTIES} 
-              onPropertyClick={setSelectedProperty}
-              view={view}
-            />
           </div>
         )}
       </main>

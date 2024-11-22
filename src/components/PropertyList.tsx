@@ -5,9 +5,10 @@ interface PropertyListProps {
   properties: Property[];
   onPropertyClick: (property: Property) => void;
   view: "map" | "list";
+  isMobile?: boolean;
 }
 
-export const PropertyList = ({ properties, onPropertyClick, view }: PropertyListProps) => {
+export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: PropertyListProps) => {
   const formatPrice = (price: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(price);
 
@@ -21,7 +22,31 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
           onClick={() => onPropertyClick(property)}
           className="bg-white hover:bg-gray-50 transition-colors cursor-pointer border rounded-lg"
         >
-          {view === "map" ? (
+          {isMobile ? (
+            <div className="flex p-4">
+              <div className="w-24 h-24">
+                <img 
+                  src={property.image} 
+                  alt={property.address}
+                  className="h-full w-full object-cover rounded"
+                />
+              </div>
+              <div className="flex-1 ml-4">
+                <div className="font-semibold text-primary text-lg">
+                  {formatPrice(property.price)}
+                </div>
+                <div className="text-sm text-gray-600 mb-1">
+                  {property.address}
+                </div>
+                <div className="text-sm text-gray-500">
+                  {property.beds}b {property.baths}ba • {property.sqft.toLocaleString()}sf
+                </div>
+                <div className="text-sm text-primary mt-1">
+                  {formatPercent(property.capRate)} Cap
+                </div>
+              </div>
+            </div>
+          ) : (
             <div className="flex h-[calc(25vh-1rem)]">
               <div className="w-64">
                 <img 
@@ -79,33 +104,6 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                       </Badge>
                     ))}
                   </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex items-center h-16 px-4">
-              <div className="w-16 h-12">
-                <img 
-                  src={property.image} 
-                  alt={property.address}
-                  className="h-full w-full object-cover rounded"
-                />
-              </div>
-              <div className="flex-1 grid grid-cols-6 gap-4 ml-4">
-                <div className="font-semibold text-primary">
-                  {formatPrice(property.price)}
-                </div>
-                <div className="col-span-2 text-sm text-gray-600 truncate">
-                  {property.address}
-                </div>
-                <div className="text-sm">
-                  {property.beds}b {property.baths}ba {property.sqft.toLocaleString()}sf
-                </div>
-                <div className="text-sm text-primary">
-                  {formatPercent(property.capRate)} Cap
-                </div>
-                <div className="text-sm text-primary-dark">
-                  {formatPercent(property.cashOnCash)} CoC
                 </div>
               </div>
             </div>

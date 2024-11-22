@@ -7,19 +7,24 @@ export const MapView = () => {
   const map = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
-    if (mapContainer.current && !map.current) {
+    if (!mapContainer.current) return;
+
+    // Initialize map only once
+    if (!map.current) {
       mapboxgl.accessToken = 'pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHNxOXB2NWowMGRqMmpxdDV5Z3E0ZWd2In0.MdhTNHPY6EhKjZnXQm6Kiw';
       
-      map.current = new mapboxgl.Map({
+      const newMap = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v11',
         center: [-97.7431, 30.2672], // Austin coordinates
         zoom: 11
       });
 
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      map.current = newMap;
     }
 
+    // Cleanup function
     return () => {
       if (map.current) {
         map.current.remove();

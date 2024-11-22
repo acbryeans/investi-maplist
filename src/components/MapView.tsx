@@ -20,6 +20,7 @@ export const MapView = () => {
         zoom: 11
       });
 
+      // Add event listeners for debugging
       newMap.on('load', () => {
         console.log('Map loaded successfully');
       });

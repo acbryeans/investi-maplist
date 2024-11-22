@@ -7,10 +7,10 @@ export const MapView = () => {
   const map = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
-    if (!mapContainer.current) return;
+    // Create a local function to handle map initialization
+    const initializeMap = async () => {
+      if (!mapContainer.current || map.current) return;
 
-    // Initialize map only once
-    if (!map.current) {
       // Set the token
       mapboxgl.accessToken = 'pk.eyJ1IjoiYXVzaXRuYnJ5ZWFucyIsImEiOiJjTN0MDk1cmgwM2x6Mmlvc2w3aDk5enYxIn0.d1mm9bIdw5zbL6_gLBRk8Q';
       
@@ -24,25 +24,29 @@ export const MapView = () => {
 
       // Initialize map with configuration
       try {
-        const newMap = new mapboxgl.Map(mapConfig);
-        
-        // Add event listeners for debugging
-        newMap.on('load', () => {
-          console.log('Map loaded successfully');
+        const newMap = await new Promise<mapboxgl.Map>((resolve) => {
+          const mapInstance = new mapboxgl.Map(mapConfig);
+          mapInstance.on('load', () => {
+            console.log('Map loaded successfully');
+            resolve(mapInstance);
+          });
+          mapInstance.on('error', (e) => {
+            console.error('Mapbox error:', e);
+          });
         });
 
-        newMap.on('error', (e) => {
-          console.error('Mapbox error:', e);
-        });
-
+        // Add controls after map is loaded
         newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
         map.current = newMap;
       } catch (error) {
-        console.error('Error initializing map:', error);
+        console.error('Map initialization error:', error);
       }
-    }
+    };
 
-    // Cleanup function
+    // Call the initialization function
+    initializeMap();
+
+    // Cleanup
     return () => {
       if (map.current) {
         map.current.remove();

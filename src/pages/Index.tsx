@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { ViewToggle } from "@/components/ViewToggle";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
 import { MapView } from "@/components/MapView";
-import { ViewToggle } from "@/components/ViewToggle";
 import { FilterPanel } from "@/components/FilterPanel";
-import type { Property } from "@/types/property";
+import { Property } from "@/types/property";
 
 const MOCK_PROPERTIES: Property[] = [
   {
@@ -243,7 +243,7 @@ const Index = () => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">Investment Properties</h1>
@@ -278,7 +278,6 @@ const Index = () => {
 
       <FilterPanel 
         onFilterChange={(filters) => {
-          // TODO: Implement filter logic
           console.log(filters);
         }}
       />

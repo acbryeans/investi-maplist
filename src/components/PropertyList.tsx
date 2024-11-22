@@ -1,4 +1,5 @@
 import { Property } from "@/types/property";
+import { Badge } from "@/components/ui/badge";
 
 interface PropertyListProps {
   properties: Property[];
@@ -13,7 +14,7 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
   const formatPercent = (value: number) => `${value.toFixed(1)}%`;
 
   return (
-    <div className={`space-y-2 ${view === "map" ? "h-[calc(100vh-10rem)] overflow-y-auto" : ""}`}>
+    <div className={`space-y-4 ${view === "map" ? "h-[calc(100vh-10rem)] overflow-y-auto" : ""}`}>
       {properties.map((property) => (
         <div
           key={property.id}
@@ -21,7 +22,6 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
           className="bg-white hover:bg-gray-50 transition-colors cursor-pointer border rounded-lg"
         >
           {view === "map" ? (
-            // Card view for map layout - significantly increased height
             <div className="flex h-[calc(25vh-1rem)]">
               <div className="w-64">
                 <img 
@@ -31,33 +31,61 @@ export const PropertyList = ({ properties, onPropertyClick, view }: PropertyList
                 />
               </div>
               <div className="flex-1 p-6">
-                <div className="flex justify-between items-start">
+                <div className="flex flex-col h-full">
+                  {/* Top section: Price, Address, Details */}
                   <div>
-                    <div className="font-semibold text-primary text-3xl">
+                    <div className="font-semibold text-primary text-3xl mb-2">
                       {formatPrice(property.price)}
                     </div>
-                    <div className="text-xl text-gray-600 truncate mt-3">
+                    <div className="text-lg text-gray-600 mb-3">
                       {property.address}
                     </div>
-                    <div className="flex gap-6 mt-6 text-lg text-gray-500">
+                    <div className="flex gap-6 text-base text-gray-500">
                       <span>{property.beds} beds</span>
                       <span>{property.baths} baths</span>
                       <span>{property.sqft.toLocaleString()} sqft</span>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-primary font-medium text-xl">
-                      Cap Rate: {formatPercent(property.capRate)}
+
+                  {/* Middle section: Investment Metrics */}
+                  <div className="flex gap-6 mt-4">
+                    <div>
+                      <div className="text-sm text-gray-500">Cap Rate</div>
+                      <div className="text-xl font-semibold text-primary">
+                        {formatPercent(property.capRate)}
+                      </div>
                     </div>
-                    <div className="text-primary-dark text-xl mt-2">
-                      CoC: {formatPercent(property.cashOnCash)}
+                    <div>
+                      <div className="text-sm text-gray-500">Cash on Cash</div>
+                      <div className="text-xl font-semibold text-primary">
+                        {formatPercent(property.cashOnCash)}
+                      </div>
                     </div>
+                  </div>
+
+                  {/* Bottom section: Tags */}
+                  <div className="flex gap-2 flex-wrap mt-4">
+                    {property.tags.map((tag) => (
+                      <Badge 
+                        key={tag}
+                        variant="secondary"
+                        className={`text-sm py-1 ${
+                          tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                          tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                          tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
+                          tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                          ""
+                        }`}
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
           ) : (
-            // Row view for list layout - keeping original dimensions
+            // Keep existing list view code
             <div className="flex items-center h-16 px-4">
               <div className="w-16 h-12">
                 <img 

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
 import { Button } from "@/components/ui/button";
 import { MapIcon, ListIcon } from "lucide-react";
 import type { Property } from "@/types/property";
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MOCK_PROPERTIES: Property[] = [
   {
@@ -131,6 +133,24 @@ const MOCK_PROPERTIES: Property[] = [
 const Index = () => {
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+
+  useEffect(() => {
+    if (view === "map" && mapContainer.current && !map.current) {
+      mapboxgl.accessToken = 'pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHNxOXB2NWowMGRqMmpxdDV5Z3E0ZWd2In0.MdhTNHPY6EhKjZnXQm6Kiw';
+      
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [-97.7431, 30.2672], // Austin coordinates
+        zoom: 11
+      });
+
+      // Add navigation controls
+      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    }
+  }, [view]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -169,10 +189,10 @@ const Index = () => {
               />
             </div>
             <div className="flex-1 bg-gray-100 rounded-lg min-h-[calc(100vh-10rem)]">
-              <img 
-                src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-97.7431,30.2672,11,0/800x600@2x?access_token=pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHNxOXB2NWowMGRqMmpxdDV5Z3E0ZWd2In0.MdhTNHPY6EhKjZnXQm6Kiw"
-                alt="Map"
-                className="w-full h-full object-cover rounded-lg"
+              <div 
+                ref={mapContainer} 
+                className="w-full h-full rounded-lg"
+                style={{ minHeight: 'calc(100vh - 10rem)' }}
               />
             </div>
           </div>

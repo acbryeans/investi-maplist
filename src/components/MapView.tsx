@@ -11,26 +11,35 @@ export const MapView = () => {
 
     // Initialize map only once
     if (!map.current) {
-      mapboxgl.accessToken = 'pk.eyJ1IjoiYXVzaXRuYnJ5ZWFucyIsImEiOiJjbTN0MDk1cmgwM2x6Mmlvc2w3aDk5enYxIn0.d1mm9bIdw5zbL6_gLBRk8Q';
+      // Set the token
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYXVzaXRuYnJ5ZWFucyIsImEiOiJjTN0MDk1cmgwM2x6Mmlvc2w3aDk5enYxIn0.d1mm9bIdw5zbL6_gLBRk8Q';
       
-      const newMap = new mapboxgl.Map({
+      // Create map configuration
+      const mapConfig = {
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-97.7431, 30.2672], // Austin coordinates
+        center: [-97.7431, 30.2672],
         zoom: 11
-      });
+      };
 
-      // Add event listeners for debugging
-      newMap.on('load', () => {
-        console.log('Map loaded successfully');
-      });
+      // Initialize map with configuration
+      try {
+        const newMap = new mapboxgl.Map(mapConfig);
+        
+        // Add event listeners for debugging
+        newMap.on('load', () => {
+          console.log('Map loaded successfully');
+        });
 
-      newMap.on('error', (e) => {
-        console.error('Mapbox error:', e);
-      });
+        newMap.on('error', (e) => {
+          console.error('Mapbox error:', e);
+        });
 
-      newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      map.current = newMap;
+        newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+        map.current = newMap;
+      } catch (error) {
+        console.error('Error initializing map:', error);
+      }
     }
 
     // Cleanup function

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ViewToggle } from "@/components/ViewToggle";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
 import { MapView } from "@/components/MapView";
 import { FilterPanel } from "@/components/FilterPanel";
 import { Property } from "@/types/property";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const MOCK_PROPERTIES: Property[] = [
   {
@@ -241,6 +242,13 @@ const MOCK_PROPERTIES: Property[] = [
 const Index = () => {
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  useEffect(() => {
+    if (isMobile) {
+      setView("map");
+    }
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
@@ -253,15 +261,15 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8">
         {view === "map" ? (
-          <div className="flex gap-8">
-            <div className="w-[600px]">
+          <div className={`flex ${isMobile ? 'flex-col' : 'gap-8'}`}>
+            <div className={`${isMobile ? 'hidden' : 'w-[600px]'}`}>
               <PropertyList 
                 properties={MOCK_PROPERTIES} 
                 onPropertyClick={setSelectedProperty}
                 view={view}
               />
             </div>
-            <div className="flex-1 bg-gray-100 rounded-lg min-h-[calc(100vh-10rem)]">
+            <div className={`${isMobile ? 'h-[calc(100vh-8rem)]' : 'flex-1'} bg-gray-100 rounded-lg min-h-[calc(100vh-10rem)]`}>
               <MapView />
             </div>
           </div>
@@ -280,12 +288,14 @@ const Index = () => {
         onFilterChange={(filters) => {
           console.log(filters);
         }}
+        isMobile={isMobile}
       />
 
       <PropertyModal 
         property={selectedProperty}
         isOpen={!!selectedProperty}
         onClose={() => setSelectedProperty(null)}
+        isMobile={isMobile}
       />
     </div>
   );

@@ -446,11 +446,47 @@ const Index = () => {
 
       <main className="pt-[4.5rem]">
         {view === "map" ? (
-          <MapView properties={MOCK_PROPERTIES} isMobile={isMobile} />
+          <div className="relative h-[calc(100vh-4.5rem)]">
+            <div className={`${isMobile ? 'w-full h-full' : 'flex gap-8 container mx-auto px-4 py-8'}`}>
+              <div className={`${isMobile ? 'hidden' : 'w-[600px]'}`}>
+                <PropertyList 
+                  properties={MOCK_PROPERTIES} 
+                  onPropertyClick={setSelectedProperty}
+                  view={view}
+                />
+              </div>
+              <div className={`${isMobile ? 'w-full h-full' : 'flex-1'}`}>
+                <MapView properties={MOCK_PROPERTIES} isMobile={isMobile} />
+              </div>
+            </div>
+          </div>
         ) : (
-          <PropertyList properties={MOCK_PROPERTIES} onPropertyClick={setSelectedProperty} view={view} isMobile={isMobile} />
+          <div className="container mx-auto px-4 py-8">
+            <div className="bg-white rounded-lg shadow p-4">
+              <PropertyList 
+                properties={MOCK_PROPERTIES} 
+                onPropertyClick={setSelectedProperty}
+                view={view}
+                isMobile={isMobile}
+              />
+            </div>
+          </div>
         )}
       </main>
+
+      <FilterPanel 
+        onFilterChange={(filters) => {
+          console.log(filters);
+        }}
+        isMobile={isMobile}
+      />
+
+      <PropertyModal 
+        property={selectedProperty}
+        isOpen={!!selectedProperty}
+        onClose={() => setSelectedProperty(null)}
+        isMobile={isMobile}
+      />
     </div>
   );
 };

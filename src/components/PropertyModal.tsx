@@ -110,6 +110,7 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
             <Button 
               className="absolute bottom-0 right-0 gap-2"
               size="lg"
+              variant="purple"
             >
               <BarChart2 size={18} />
               Analyze

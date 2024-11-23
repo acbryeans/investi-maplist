@@ -46,7 +46,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 2480,
         soldDate: "2023-12-28",
       },
-    ]
+    ],
   },
   {
     id: "p2", // Hyde Park
@@ -86,7 +86,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 1780,
         soldDate: "2023-12-28",
       },
-    ]
+    ],
   },
   {
     id: "p3", // South Congress
@@ -126,7 +126,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 3300,
         soldDate: "2024-01-10",
       },
-    ]
+    ],
   },
   {
     id: "p4", // Clarksville
@@ -166,7 +166,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 2900,
         soldDate: "2023-12-28",
       },
-    ]
+    ],
   },
   {
     id: "p5", // Mueller
@@ -206,7 +206,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 2220,
         soldDate: "2024-01-08",
       },
-    ]
+    ],
   },
   {
     id: "p6", // Zilker
@@ -246,7 +246,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 1880,
         soldDate: "2024-01-02",
       },
-    ]
+    ],
   },
   {
     id: "p7", // North Loop
@@ -286,7 +286,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 1580,
         soldDate: "2024-01-15",
       },
-    ]
+    ],
   },
   {
     id: "p8", // Barton Hills
@@ -326,7 +326,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 2550,
         soldDate: "2023-12-28",
       },
-    ]
+    ],
   },
   {
     id: "p9", // Tarrytown
@@ -366,7 +366,7 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 3520,
         soldDate: "2024-01-05",
       },
-    ]
+    ],
   },
   {
     id: "p10", // East Austin
@@ -406,8 +406,8 @@ const MOCK_PROPERTIES: Property[] = [
         sqft: 1790,
         soldDate: "2024-01-10",
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const Index = () => {
@@ -426,11 +426,47 @@ const Index = () => {
 
       <main className="pt-[4.5rem]">
         {view === "map" ? (
-          <MapView properties={MOCK_PROPERTIES} isMobile={isMobile} />
+          <div className="relative h-[calc(100vh-4.5rem)]">
+            <div className={`${isMobile ? 'w-full h-full' : 'flex gap-8 container mx-auto px-4 py-8'}`}>
+              <div className={`${isMobile ? 'hidden' : 'w-[600px]'}`}>
+                <PropertyList 
+                  properties={MOCK_PROPERTIES} 
+                  onPropertyClick={setSelectedProperty}
+                  view={view}
+                />
+              </div>
+              <div className={`${isMobile ? 'w-full h-full' : 'flex-1'}`}>
+                <MapView isMobile={isMobile} />
+              </div>
+            </div>
+          </div>
         ) : (
-          <PropertyList properties={MOCK_PROPERTIES} onPropertyClick={setSelectedProperty} view={view} isMobile={isMobile} />
+          <div className="container mx-auto px-4 py-8">
+            <div className="bg-white rounded-lg shadow p-4">
+              <PropertyList 
+                properties={MOCK_PROPERTIES} 
+                onPropertyClick={setSelectedProperty}
+                view={view}
+                isMobile={isMobile}
+              />
+            </div>
+          </div>
         )}
       </main>
+
+      <FilterPanel 
+        onFilterChange={(filters) => {
+          console.log(filters);
+        }}
+        isMobile={isMobile}
+      />
+
+      <PropertyModal 
+        property={selectedProperty}
+        isOpen={!!selectedProperty}
+        onClose={() => setSelectedProperty(null)}
+        isMobile={isMobile}
+      />
     </div>
   );
 };

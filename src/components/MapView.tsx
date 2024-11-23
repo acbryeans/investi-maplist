@@ -1,7 +1,6 @@
 import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api';
 import { useMemo, useState } from 'react';
 import { Property } from '@/types/property';
-import { PropertyModal } from './PropertyModal';
 
 // Assign specific coordinates to our demo properties
 const PROPERTY_COORDINATES = {
@@ -22,25 +21,7 @@ interface MapViewProps {
   isMobile?: boolean;
   onPropertyClick: (property: Property) => void;
 }
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * A component that renders a Google Map with markers for each property.
- *
- * It uses the `@react-google-maps/api` library to load the map and display
- * markers. The markers are positioned randomly within a 3-4 mile radius of
- * downtown Austin. The map is rendered in a container that fills the width
- * and height of the parent element.
- *
- * When the map is loading, a message is displayed in the center of the
- * container. When there is an error loading the map, an error message is
- * displayed.
- *
- * @param {Object[]} properties - An array of property objects.
- * @param {boolean} [isMobile] - Whether the component is rendered on a mobile
- * device.
- * @returns {React.ReactElement} - A React component that renders a Google Map.
- */
-/******  be88322f-6341-4c27-a2be-3c6538de4fff  *******/
+
 const libraries = ['places'];
 
 export const MapView = ({ properties, isMobile, onPropertyClick }: MapViewProps) => {
@@ -108,7 +89,7 @@ export const MapView = ({ properties, isMobile, onPropertyClick }: MapViewProps)
       options={options}
     >
       {properties.map((property) => {
-        const coordinates = PROPERTY_COORDINATES[`p${property.id}`];
+        const coordinates = PROPERTY_COORDINATES[property.id];
         if (!coordinates) return null;
 
         const isHovered = hoveredProperty === property.id;

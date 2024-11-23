@@ -37,6 +37,8 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps...</div>;
 
+  console.log('Properties:', properties);
+
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
@@ -44,16 +46,19 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
       center={center}
       options={options}
     >
-      {properties.map(property => (
-        <Marker
-          key={property.id}
-          position={{ lat: property.lat, lng: property.lng }}
-          onClick={() => {
-            setSelectedProperty(property);
-            onPropertyClick(property);
-          }}
-        />
-      ))}
+      {properties.map(property => {
+        console.log('Rendering Marker for:', property);
+        return (
+          <Marker
+            key={property.id}
+            position={{ lat: property.lat, lng: property.lng }}
+            onClick={() => {
+              setSelectedProperty(property);
+              onPropertyClick(property);
+            }}
+          />
+        );
+      })}
 
       {selectedProperty && (
         <InfoWindow

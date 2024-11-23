@@ -7,7 +7,7 @@ interface MapViewProps {
 
 const libraries = ['places'];
 
-export const MapView = ({ isMobile }: MapViewProps) => {
+export const MapView = ({ properties, isMobile }: MapViewProps) => {
   const mapContainerStyle = useMemo(() => ({
     width: '100%',
     height: isMobile ? '100%' : 'calc(100vh - 10rem)',
@@ -15,7 +15,7 @@ export const MapView = ({ isMobile }: MapViewProps) => {
   }), [isMobile]);
 
   const center = useMemo(() => ({
-    lat: 30.2672,
+    lat: 30.2672, // Default center (Austin, TX)
     lng: -97.7431
   }), []);
 
@@ -38,6 +38,14 @@ export const MapView = ({ isMobile }: MapViewProps) => {
       zoom={11}
       center={center}
       options={options}
-    />
+    >
+      {properties.map(property => (
+        <Marker
+          key={property.id}
+          position={{ lat: property.latitude, lng: property.longitude }}
+          label={{ text: `$${property.price.toLocaleString()}`, color: "white" }}
+        />
+      ))}
+    </GoogleMap>
   );
 };

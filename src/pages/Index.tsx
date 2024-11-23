@@ -47,6 +47,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    latitude: 30.2675,
+    longitude: -97.7435,
   },
   {
     id: "2",
@@ -87,6 +89,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    latitude: 30.2678,
+    longitude: -97.7420,
   },
   {
     id: "3",
@@ -127,6 +131,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
+    latitude: 30.2690,
+    longitude: -97.7430,
   },
   {
     id: "4",
@@ -167,6 +173,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    latitude: 30.2675,
+    longitude: -97.7435,
   },
   {
     id: "5",
@@ -207,6 +215,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-08",
       },
     ],
+    latitude: 30.2678,
+    longitude: -97.7420,
   },
   {
     id: "6",
@@ -247,6 +257,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-02",
       },
     ],
+    latitude: 30.2690,
+    longitude: -97.7430,
   },
   {
     id: "7",
@@ -287,6 +299,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-15",
       },
     ],
+    latitude: 30.2675,
+    longitude: -97.7435,
   },
   {
     id: "8",
@@ -327,6 +341,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    latitude: 30.2678,
+    longitude: -97.7420,
   },
   {
     id: "9",
@@ -367,6 +383,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-05",
       },
     ],
+    latitude: 30.2690,
+    longitude: -97.7430,
   },
   {
     id: "10",
@@ -407,6 +425,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
+    latitude: 30.2675,
+    longitude: -97.7435,
   },
 ];
 
@@ -436,7 +456,7 @@ const Index = () => {
                 />
               </div>
               <div className={`${isMobile ? 'w-full h-full' : 'flex-1'}`}>
-                <MapView isMobile={isMobile} />
+                <MapView properties={MOCK_PROPERTIES} isMobile={isMobile} />
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <div
           key={property.id}
           onClick={() => onPropertyClick(property)}
-          className="bg-white hover:bg-gray-50 transition-all duration-200 cursor-pointer border rounded-lg shadow-sm hover:shadow-md"
+          className="property-card bg-white hover:bg-gray-50 transition-all duration-200 cursor-pointer border rounded-lg"
         >
           {isMobile ? (
             <div className="flex p-4">
@@ -56,55 +56,81 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 />
               </div>
               <div className="flex-1 p-4">
-                <div className="flex flex-col h-full">
-                  <div className="mb-2">
-                    <div className={`font-semibold text-primary ${view === "map" ? "text-2xl" : "text-xl"} mb-1`}>
-                      {formatPrice(property.price)}
-                    </div>
-                    <div className={`text-gray-600 ${view === "map" ? "text-base" : "text-sm"} mb-1`}>
-                      {property.address}
-                    </div>
-                    <div className={`flex gap-4 ${view === "map" ? "text-sm" : "text-xs"} text-gray-500`}>
-                      <span>{property.beds} beds</span>
-                      <span>{property.baths} baths</span>
-                      <span>{property.sqft.toLocaleString()} sqft</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-6 mb-2">
-                    <div>
-                      <div className={`text-gray-500 ${view === "map" ? "text-sm" : "text-xs"}`}>Cap Rate</div>
-                      <div className={`font-semibold text-primary ${view === "map" ? "text-lg" : "text-base"}`}>
-                        {formatPercent(property.capRate)}
+                {view === "map" ? (
+                  <div className="flex flex-col h-full">
+                    <div className="mb-2">
+                      <div className="font-semibold text-primary text-2xl mb-1">
+                        {formatPrice(property.price)}
+                      </div>
+                      <div className="text-gray-600 text-base mb-1">
+                        {property.address}
+                      </div>
+                      <div className="flex gap-4 text-sm text-gray-500">
+                        <span>{property.beds} beds</span>
+                        <span>{property.baths} baths</span>
+                        <span>{property.sqft.toLocaleString()} sqft</span>
                       </div>
                     </div>
+
+                    <div className="flex gap-6 mb-2">
+                      <div>
+                        <div className="text-gray-500 text-sm">Cap Rate</div>
+                        <div className="font-semibold text-primary text-lg">
+                          {formatPercent(property.capRate)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500 text-sm">Cash on Cash</div>
+                        <div className="font-semibold text-primary text-lg">
+                          {formatPercent(property.cashOnCash)}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-1.5 flex-wrap">
+                      {property.tags?.map((tag) => (
+                        <Badge 
+                          key={tag}
+                          variant="secondary"
+                          className={`text-xs py-0.5 px-2 ${
+                            tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                            tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                            tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
+                            tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                            tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                            "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-between items-center h-full">
                     <div>
-                      <div className={`text-gray-500 ${view === "map" ? "text-sm" : "text-xs"}`}>Cash on Cash</div>
-                      <div className={`font-semibold text-primary ${view === "map" ? "text-lg" : "text-base"}`}>
-                        {formatPercent(property.cashOnCash)}
+                      <div className="font-semibold text-primary text-xl mb-1">
+                        {formatPrice(property.price)}
+                      </div>
+                      <div className="text-gray-600 text-sm">
+                        {property.address}
+                      </div>
+                    </div>
+                    <div className="flex gap-6 items-center">
+                      <div className="flex gap-3 text-xs text-gray-500">
+                        <span>{property.beds}b</span>
+                        <span>{property.baths}ba</span>
+                        <span>{property.sqft.toLocaleString()}sf</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-gray-500">Cap Rate</div>
+                        <div className="font-semibold text-primary">
+                          {formatPercent(property.capRate)}
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex gap-1.5 flex-wrap">
-                    {property.tags?.map((tag) => (
-                      <Badge 
-                        key={tag}
-                        variant="secondary"
-                        className={`${view === "map" ? "text-xs" : "text-[10px]"} py-0.5 px-2 ${
-                          tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                          tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                          tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
-                          tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                          tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                          "bg-gray-100 text-gray-800"
-                        }`}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           )}

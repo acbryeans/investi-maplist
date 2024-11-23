@@ -57,7 +57,7 @@
 [data-state='checked'],
 [data-state='active'],
 .active {
-  @apply text-white bg-primary !important;
+  @apply bg-primary text-white !important;
 }
 
 /* Add hover effects for property cards */

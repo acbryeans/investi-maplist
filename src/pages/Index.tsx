@@ -58,7 +58,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1800,
     capRate: 7.2,
     cashOnCash: 9.5,
-    tags: ["Cashflow", "Below Market"],
+    tags: ["High Cap Rate", "Below Market"],
     rentEstimate: 3000,
     repairsEstimate: 5000,
     financing: {
@@ -248,7 +248,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b fixed top-0 left-0 right-0 z-10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl md:text-2xl font-bold text-primary">Investment Properties</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-primary">Find Your Next Investment</h1>
           <ViewToggle view={view} onViewChange={setView} isMobile={isMobile} />
         </div>
       </header>

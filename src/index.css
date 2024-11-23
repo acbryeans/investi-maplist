@@ -52,3 +52,10 @@
 .investment-tag.low {
   @apply bg-investment-low/10 text-investment-low;
 }
+
+/* Add styles for highlighted state */
+[data-state='checked'],
+[data-state='active'],
+.active {
+  @apply text-white !important;
+}

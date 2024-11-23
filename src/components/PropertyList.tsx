@@ -20,7 +20,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <div
           key={property.id}
           onClick={() => onPropertyClick(property)}
-          className="bg-white hover:bg-gray-50 transition-colors cursor-pointer border rounded-lg"
+          className="bg-white hover:bg-gray-50 transition-all duration-200 cursor-pointer border rounded-lg shadow-sm hover:shadow-md"
         >
           {isMobile ? (
             <div className="flex p-4">
@@ -47,7 +47,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               </div>
             </div>
           ) : (
-            <div className="flex h-[calc(25vh-1rem)]">
+            <div className={`flex ${view === "map" ? "h-[calc(25vh-1rem)]" : "h-[calc(12vh-1rem)]"}`}>
               <div className="w-64">
                 <img 
                   src={property.image} 

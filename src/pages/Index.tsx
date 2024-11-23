@@ -67,7 +67,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 2500,
     },
     yearlyAppreciation: 5,
-    comps: [],
+    comps: [
+      {
+        address: "458 Cashflow St",
+        price: 545000,
+        sqft: 1750,
+        soldDate: "2024-01-10",
+      },
+      {
+        address: "460 Cashflow St",
+        price: 552000,
+        sqft: 1820,
+        soldDate: "2024-01-05",
+      },
+      {
+        address: "454 Cashflow St",
+        price: 548000,
+        sqft: 1780,
+        soldDate: "2023-12-28",
+      },
+    ],
   },
   {
     id: "3",
@@ -88,7 +107,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 5300,
     },
     yearlyAppreciation: 6,
-    comps: [],
+    comps: [
+      {
+        address: "790 Equity Ln",
+        price: 895000,
+        sqft: 3250,
+        soldDate: "2024-01-20",
+      },
+      {
+        address: "785 Equity Ln",
+        price: 870000,
+        sqft: 3150,
+        soldDate: "2024-01-15",
+      },
+      {
+        address: "792 Equity Ln",
+        price: 880000,
+        sqft: 3300,
+        soldDate: "2024-01-10",
+      },
+    ],
   },
   {
     id: "4",
@@ -109,7 +147,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 2000,
     },
     yearlyAppreciation: 7,
-    comps: [],
+    comps: [
+      {
+        address: "320 ROI Rd",
+        price: 430000,
+        sqft: 1250,
+        soldDate: "2024-01-05",
+      },
+      {
+        address: "315 ROI Rd",
+        price: 415000,
+        sqft: 1150,
+        soldDate: "2024-01-02",
+      },
+      {
+        address: "330 ROI Rd",
+        price: 420000,
+        sqft: 1200,
+        soldDate: "2023-12-28",
+      },
+    ],
   },
   {
     id: "5",
@@ -130,7 +187,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 3600,
     },
     yearlyAppreciation: 6.5,
-    comps: [],
+    comps: [
+      {
+        address: "570 Portfolio Pl",
+        price: 680000,
+        sqft: 2850,
+        soldDate: "2024-01-15",
+      },
+      {
+        address: "550 Portfolio Pl",
+        price: 670000,
+        sqft: 2780,
+        soldDate: "2024-01-10",
+      },
+      {
+        address: "580 Portfolio Pl",
+        price: 675000,
+        sqft: 2820,
+        soldDate: "2024-01-08",
+      },
+    ],
   },
   {
     id: "6",
@@ -151,7 +227,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 2700,
     },
     yearlyAppreciation: 9,
-    comps: [],
+    comps: [
+      {
+        address: "895 Dividend Dr",
+        price: 490000,
+        sqft: 1550,
+        soldDate: "2024-01-12",
+      },
+      {
+        address: "880 Dividend Dr",
+        price: 500000,
+        sqft: 1620,
+        soldDate: "2024-01-05",
+      },
+      {
+        address: "885 Dividend Dr",
+        price: 495000,
+        sqft: 1580,
+        soldDate: "2024-01-02",
+      },
+    ],
   },
   {
     id: "7",
@@ -172,7 +267,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 5600,
     },
     yearlyAppreciation: 6,
-    comps: [],
+    comps: [
+      {
+        address: "430 Wealth Way",
+        price: 920000,
+        sqft: 3400,
+        soldDate: "2024-01-25",
+      },
+      {
+        address: "445 Wealth Way",
+        price: 930000,
+        sqft: 3550,
+        soldDate: "2024-01-20",
+      },
+      {
+        address: "440 Wealth Way",
+        price: 910000,
+        sqft: 3300,
+        soldDate: "2024-01-15",
+      },
+    ],
   },
   {
     id: "8",
@@ -193,7 +307,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 1600,
     },
     yearlyAppreciation: 7.5,
-    comps: [],
+    comps: [
+      {
+        address: "770 Income Ave",
+        price: 385000,
+        sqft: 1020,
+        soldDate: "2024-01-10",
+      },
+      {
+        address: "780 Income Ave",
+        price: 375000,
+        sqft: 980,
+        soldDate: "2024-01-05",
+      },
+      {
+        address: "750 Income Ave",
+        price: 370000,
+        sqft: 1000,
+        soldDate: "2023-12-28",
+      },
+    ],
   },
   {
     id: "9",
@@ -214,7 +347,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 3500,
     },
     yearlyAppreciation: 6,
-    comps: [],
+    comps: [
+      {
+        address: "540 Asset St",
+        price: 730000,
+        sqft: 2650,
+        soldDate: "2024-01-15",
+      },
+      {
+        address: "550 Asset St",
+        price: 715000,
+        sqft: 2580,
+        soldDate: "2024-01-10",
+      },
+      {
+        address: "535 Asset St",
+        price: 718000,
+        sqft: 2620,
+        soldDate: "2024-01-05",
+      },
+    ],
   },
   {
     id: "10",
@@ -235,7 +387,26 @@ const MOCK_PROPERTIES: Property[] = [
       monthlyPayment: 4800,
     },
     yearlyAppreciation: 5.5,
-    comps: [],
+    comps: [
+      {
+        address: "230 Profit Pkwy",
+        price: 855000,
+        sqft: 3120,
+        soldDate: "2024-01-20",
+      },
+      {
+        address: "235 Profit Pkwy",
+        price: 845000,
+        sqft: 3080,
+        soldDate: "2024-01-15",
+      },
+      {
+        address: "240 Profit Pkwy",
+        price: 842000,
+        sqft: 3060,
+        soldDate: "2024-01-10",
+      },
+    ],
   },
 ];
 
@@ -301,3 +472,4 @@ const Index = () => {
 };
 
 export default Index;
+

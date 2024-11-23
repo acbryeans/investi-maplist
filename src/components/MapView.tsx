@@ -1,13 +1,16 @@
-import { useLoadScript, GoogleMap } from '@react-google-maps/api';
+import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api';
 import { useMemo } from 'react';
+import { Property } from '@/types/property';
 
 interface MapViewProps {
   isMobile?: boolean;
+  properties: Property[];
+  onPropertyClick: (property: Property) => void;
 }
 
 const libraries = ['places'];
 
-export const MapView = ({ isMobile }: MapViewProps) => {
+export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps) => {
   const mapContainerStyle = useMemo(() => ({
     width: '100%',
     height: isMobile ? '100%' : 'calc(100vh - 10rem)',
@@ -29,8 +32,8 @@ export const MapView = ({ isMobile }: MapViewProps) => {
     libraries: libraries as any,
   });
 
-  if (loadError) return <div className="w-full h-full flex items-center justify-center text-red-500">Error loading maps</div>;
-  if (!isLoaded) return <div className="w-full h-full flex items-center justify-center">Loading maps...</div>;
+  if (loadError) return <div>Error loading maps</div>;
+  if (!isLoaded) return <div>Loading maps...</div>;
 
   return (
     <GoogleMap
@@ -38,6 +41,14 @@ export const MapView = ({ isMobile }: MapViewProps) => {
       zoom={11}
       center={center}
       options={options}
-    />
+    >
+      {properties.map(property => (
+        <Marker
+          key={property.id}
+          position={{ lat: property.lat, lng: property.lng }}
+          onClick={() => onPropertyClick(property)}
+        />
+      ))}
+    </GoogleMap>
   );
 };

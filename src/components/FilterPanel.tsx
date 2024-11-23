@@ -73,14 +73,14 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
               <div className="space-y-4">
                 <div className="flex gap-4">
                   <Button 
-                    variant={investmentType === 'cash' ? 'default' : 'outline'}
+                    variant={investmentType === 'cash' ? 'purple' : 'outline'}
                     onClick={() => setInvestmentType('cash')}
                     className="flex-1"
                   >
                     Investable Cash
                   </Button>
                   <Button 
-                    variant={investmentType === 'downpayment' ? 'default' : 'outline'}
+                    variant={investmentType === 'downpayment' ? 'purple' : 'outline'}
                     onClick={() => setInvestmentType('downpayment')}
                     className="flex-1"
                   >

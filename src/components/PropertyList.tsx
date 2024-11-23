@@ -46,9 +46,48 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 </div>
               </div>
             </div>
+          ) : view === "map" ? (
+            <div className="flex h-[calc(25vh-1rem)]">
+              <div className="w-64">
+                <img 
+                  src={property.image} 
+                  alt={property.address}
+                  className="h-full w-full object-cover rounded-l-lg"
+                />
+              </div>
+              <div className="flex-1 p-4">
+                <div className="mb-2">
+                  <div className="font-semibold text-primary text-2xl mb-1">
+                    {formatPrice(property.price)}
+                  </div>
+                  <div className="text-gray-600 text-base mb-1">
+                    {property.address}
+                  </div>
+                  <div className="flex gap-4 text-sm text-gray-500">
+                    <span>{property.beds} beds</span>
+                    <span>{property.baths} baths</span>
+                    <span>{property.sqft.toLocaleString()} sqft</span>
+                  </div>
+                </div>
+                <div className="flex gap-6 mb-2">
+                  <div>
+                    <div className="text-gray-500 text-sm">Cap Rate</div>
+                    <div className="font-semibold text-primary text-lg">
+                      {formatPercent(property.capRate)}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-gray-500 text-sm">Cash on Cash</div>
+                    <div className="font-semibold text-primary text-lg">
+                      {formatPercent(property.cashOnCash)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
-            <div className={`flex ${view === "map" ? "h-[calc(25vh-1rem)]" : "h-32"}`}>
-              <div className={`${view === "map" ? "w-64" : "w-48"}`}>
+            <div className="flex h-32">
+              <div className="w-48">
                 <img 
                   src={property.image} 
                   alt={property.address}

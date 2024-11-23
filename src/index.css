@@ -57,5 +57,10 @@
 [data-state='checked'],
 [data-state='active'],
 .active {
-  @apply text-white !important;
+  @apply text-white bg-primary !important;
+}
+
+/* Add hover effects for property cards */
+.property-card {
+  @apply shadow-sm hover:shadow-lg transition-all duration-200;
 }

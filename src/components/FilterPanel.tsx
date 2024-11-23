@@ -51,14 +51,14 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
                 Cash-Flow
               </Button>
               <Button 
-                variant={strategy === 'appreciation' ? 'default' : 'outline'}
+                variant={strategy === 'appreciation' ? 'purple' : 'outline'}
                 onClick={() => setStrategy('appreciation')}
                 className="flex-1"
               >
                 Appreciation
               </Button>
               <Button 
-                variant={strategy === 'custom' ? 'default' : 'outline'}
+                variant={strategy === 'custom' ? 'purple' : 'outline'}
                 onClick={() => setStrategy('custom')}
                 className="flex-1"
               >

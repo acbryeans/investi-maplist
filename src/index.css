@@ -56,7 +56,11 @@
 /* Add styles for highlighted state */
 [data-state='checked'],
 [data-state='active'],
-.active {
+.active,
+[data-state='on'],
+button[aria-pressed='true'],
+button[data-state='open'],
+button[variant='default']:not([variant='outline']) {
   @apply bg-primary text-white !important;
 }
 

@@ -74,7 +74,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
         <Button 
           className="absolute bottom-4 right-4 gap-2"
           size="sm"
-          variant="outline"
+          variant="purple"
         >
           <BarChart2 size={16} />
           Analyze

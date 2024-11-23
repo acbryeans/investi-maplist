@@ -11,7 +11,7 @@ export const ViewToggle = ({ view, onViewChange, isMobile }: ViewToggleProps) =>
   return (
     <div className="flex gap-2">
       <Button
-        variant={view === "map" ? "default" : "outline"}
+        variant={view === "map" ? "purple" : "outline"}
         onClick={() => onViewChange("map")}
         className={`gap-2 ${isMobile ? 'px-3 py-1.5 text-sm' : ''}`}
       >
@@ -19,7 +19,7 @@ export const ViewToggle = ({ view, onViewChange, isMobile }: ViewToggleProps) =>
         Map
       </Button>
       <Button
-        variant={view === "list" ? "default" : "outline"}
+        variant={view === "list" ? "purple" : "outline"}
         onClick={() => onViewChange("list")}
         className={`gap-2 ${isMobile ? 'px-3 py-1.5 text-sm' : ''}`}
       >

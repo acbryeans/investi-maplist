@@ -44,7 +44,7 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
             <h3 className="text-lg font-semibold">Investment Strategy</h3>
             <div className="flex gap-2">
               <Button 
-                variant={strategy === 'cashflow' ? 'default' : 'outline'}
+                variant={strategy === 'cashflow' ? 'purple' : 'outline'}
                 onClick={() => setStrategy('cashflow')}
                 className="flex-1"
               >

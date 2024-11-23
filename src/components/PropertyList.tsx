@@ -56,7 +56,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 />
               </div>
               <div className="flex-1 p-4">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-start">
                   <div>
                     <div className="font-semibold text-primary text-xl mb-1">
                       {formatPrice(property.price)}
@@ -64,56 +64,58 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                     <div className="text-gray-600 mb-1">
                       {property.address}
                     </div>
-                    <div className="flex gap-4 text-sm text-gray-500 mb-2">
+                    <div className="flex gap-1.5 flex-wrap">
+                      {property.tags?.map((tag) => (
+                        <Badge 
+                          key={tag}
+                          variant="secondary"
+                          className={`text-xs py-0.5 px-2 ${
+                            tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                            tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                            tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
+                            tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                            tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                            "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-8">
+                    <div className="flex gap-4 text-sm text-gray-500">
                       <span>{property.beds} beds</span>
                       <span>{property.baths} baths</span>
                       <span>{property.sqft.toLocaleString()} sqft</span>
                     </div>
+                    <div className="flex gap-6">
+                      <div>
+                        <div className="text-sm text-gray-500">Cap Rate</div>
+                        <div className="font-semibold text-primary">
+                          {formatPercent(property.capRate)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-gray-500">Cash on Cash</div>
+                        <div className="font-semibold text-primary">
+                          {formatPercent(property.cashOnCash)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-gray-500">Monthly Rent</div>
+                        <div className="font-semibold text-primary">
+                          {formatPrice(property.rentEstimate)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-gray-500">Gross Yield</div>
+                        <div className="font-semibold text-primary">
+                          {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-right">
-                    <div>
-                      <div className="text-sm text-gray-500">Cap Rate</div>
-                      <div className="font-semibold text-primary">
-                        {formatPercent(property.capRate)}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500">Cash on Cash</div>
-                      <div className="font-semibold text-primary">
-                        {formatPercent(property.cashOnCash)}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500">Monthly Rent</div>
-                      <div className="font-semibold text-primary">
-                        {formatPrice(property.rentEstimate)}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500">Gross Yield</div>
-                      <div className="font-semibold text-primary">
-                        {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-1.5 flex-wrap mt-2">
-                  {property.tags?.map((tag) => (
-                    <Badge 
-                      key={tag}
-                      variant="secondary"
-                      className={`text-xs py-0.5 px-2 ${
-                        tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                        tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                        tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                        tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                        tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                        "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
                 </div>
               </div>
             </div>

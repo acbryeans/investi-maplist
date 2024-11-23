@@ -47,6 +47,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "2",
@@ -87,6 +89,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "3",
@@ -127,6 +131,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "4",
@@ -167,6 +173,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "5",
@@ -207,6 +215,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-08",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "6",
@@ -247,6 +257,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-02",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "7",
@@ -287,6 +299,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-15",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "8",
@@ -327,6 +341,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "9",
@@ -367,6 +383,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-05",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
   {
     id: "10",
@@ -407,6 +425,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
+    lat: 30.2729,
+    lng: -97.7444,
   },
 ];
 
@@ -414,6 +434,10 @@ const Index = () => {
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const handlePropertyClick = (property: Property) => {
+    setSelectedProperty(property);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -436,7 +460,11 @@ const Index = () => {
                 />
               </div>
               <div className={`${isMobile ? 'w-full h-full' : 'flex-1'}`}>
-                <MapView isMobile={isMobile} />
+                <MapView
+                  isMobile={isMobile}
+                  properties={MOCK_PROPERTIES}
+                  onPropertyClick={handlePropertyClick}
+                />
               </div>
             </div>
           </div>
@@ -461,12 +489,14 @@ const Index = () => {
         isMobile={isMobile}
       />
 
-      <PropertyModal 
-        property={selectedProperty}
-        isOpen={!!selectedProperty}
-        onClose={() => setSelectedProperty(null)}
-        isMobile={isMobile}
-      />
+      {selectedProperty && (
+        <PropertyModal
+          property={selectedProperty}
+          isOpen={!!selectedProperty}
+          onClose={() => setSelectedProperty(null)}
+          isMobile={isMobile}
+        />
+      )}
     </div>
   );
 };

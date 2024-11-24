@@ -83,6 +83,24 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                     </div>
                   </div>
                 </div>
+                <div className="flex gap-1.5 flex-wrap">
+                  {property.tags.map((tag) => (
+                    <Badge 
+                      key={tag}
+                      variant="secondary"
+                      className={`text-xs py-0.5 px-2 ${
+                        tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                        tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                        tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
+                        tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                        tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                        "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
@@ -104,7 +122,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                       {property.address}
                     </div>
                     <div className="flex gap-1.5 flex-wrap">
-                      {property.tags?.map((tag) => (
+                      {property.tags.map((tag) => (
                         <Badge 
                           key={tag}
                           variant="secondary"
@@ -139,18 +157,6 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                         <div className="text-sm text-gray-500">Cash on Cash</div>
                         <div className="font-semibold text-primary">
                           {formatPercent(property.cashOnCash)}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500">Monthly Rent</div>
-                        <div className="font-semibold text-primary">
-                          {formatPrice(property.rentEstimate)}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500">Gross Yield</div>
-                        <div className="font-semibold text-primary">
-                          {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
                         </div>
                       </div>
                     </div>

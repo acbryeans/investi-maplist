@@ -21,7 +21,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
 
   const center = useMemo(() => ({
     lat: 30.2672,
-    lng: -97.7431
+    lng: -97.7431,
   }), []);
 
   const options = useMemo(() => ({
@@ -37,28 +37,33 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps...</div>;
 
-  console.log('Properties:', properties);
-
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={11}
+      zoom={12}
       center={center}
       options={options}
     >
-      {properties.map(property => {
-        console.log('Rendering Marker for:', property);
-        return (
-          <Marker
-            key={property.id}
-            position={{ lat: property.lat, lng: property.lng }}
-            onClick={() => {
-              setSelectedProperty(property);
-              onPropertyClick(property);
-            }}
-          />
-        );
-      })}
+      {properties.map(property => (
+        <Marker
+          key={property.id}
+          position={{ lat: property.lat, lng: property.lng }}
+          label={{
+            text: `$${(property.price / 1000).toFixed(0)}k`,
+            color: "white",
+            fontSize: "12px",
+            fontWeight: "bold",
+          }}
+          icon={{
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            labelOrigin: new window.google.maps.Point(15, 10),
+          }}
+          onClick={() => {
+            setSelectedProperty(property);
+            onPropertyClick(property);
+          }}
+        />
+      ))}
 
       {selectedProperty && (
         <InfoWindow
@@ -68,6 +73,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           <div>
             <h4>{selectedProperty.address}</h4>
             <p>Price: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}</p>
+            <button onClick={() => onPropertyClick(selectedProperty)}>View Details</button>
           </div>
         </InfoWindow>
       )}

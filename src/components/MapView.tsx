@@ -73,6 +73,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           <div>
             <h4>{selectedProperty.address}</h4>
             <p>Price: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}</p>
+            <p>Tags: {selectedProperty.tags.join(', ')}</p>
             <button onClick={() => onPropertyClick(selectedProperty)}>View Details</button>
           </div>
         </InfoWindow>

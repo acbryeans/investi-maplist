@@ -58,13 +58,13 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               <div className="flex-1 p-3 overflow-hidden">
                 <div className="grid gap-1 h-full">
                   <div className="overflow-hidden">
-                    <div className="font-semibold text-primary text-[length:calc(0.8rem+0.2cqw)] truncate">
+                    <div className="font-semibold text-primary text-[length:calc(1rem+0.2cqw)] truncate">
                       {formatPrice(property.price)}
                     </div>
-                    <div className="text-gray-600 text-[length:calc(0.7rem+0.1cqw)] truncate">
+                    <div className="text-gray-600 text-[length:calc(0.85rem+0.1cqw)] truncate">
                       {property.address}
                     </div>
-                    <div className="flex gap-2 text-[length:calc(0.65rem+0.1cqw)] text-gray-500">
+                    <div className="flex gap-2 text-[length:calc(0.8rem+0.1cqw)] text-gray-500">
                       <span>{property.beds} beds</span>
                       <span>{property.baths} baths</span>
                       <span>{property.sqft.toLocaleString()} sqft</span>
@@ -73,14 +73,14 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                   
                   <div className="flex gap-4">
                     <div>
-                      <div className="text-gray-500 text-[length:calc(0.65rem+0.1cqw)]">Cap Rate</div>
-                      <div className="font-semibold text-primary text-[length:calc(0.7rem+0.1cqw)]">
+                      <div className="text-gray-500 text-[length:calc(0.8rem+0.1cqw)]">Cap Rate</div>
+                      <div className="font-semibold text-primary text-[length:calc(0.85rem+0.1cqw)]">
                         {formatPercent(property.capRate)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-500 text-[length:calc(0.65rem+0.1cqw)]">Cash on Cash</div>
-                      <div className="font-semibold text-primary text-[length:calc(0.7rem+0.1cqw)]">
+                      <div className="text-gray-500 text-[length:calc(0.8rem+0.1cqw)]">Cash on Cash</div>
+                      <div className="font-semibold text-primary text-[length:calc(0.85rem+0.1cqw)]">
                         {formatPercent(property.cashOnCash)}
                       </div>
                     </div>
@@ -91,7 +91,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                       <Badge 
                         key={tag}
                         variant="secondary"
-                        className={`text-[length:calc(0.65rem+0.1cqw)] py-0.5 px-1.5 whitespace-nowrap ${
+                        className={`text-[length:calc(0.8rem+0.1cqw)] py-0.5 px-1.5 whitespace-nowrap ${
                           tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                           tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                           tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :

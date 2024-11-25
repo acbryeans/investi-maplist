@@ -15,7 +15,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   const formatPercent = (value: number) => `${value.toFixed(1)}%`;
 
   return (
-    <div className={`space-y-6 ${view === "map" ? "h-[calc(100vh-5rem)] overflow-y-auto px-4" : ""}`}>
+    <div className={`space-y-4 ${view === "map" ? "px-2 py-2" : "max-w-[1920px] mx-auto px-4 py-4"}`}>
       {properties.map((property) => (
         <div
           key={property.id}

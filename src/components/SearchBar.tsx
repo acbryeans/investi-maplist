@@ -7,7 +7,7 @@ interface SearchBarProps {
 
 export const SearchBar = ({ isMobile }: SearchBarProps) => {
   return (
-    <div className={`relative ${isMobile ? 'w-full' : 'w-[600px]'}`}>
+    <div className={`relative ${isMobile ? 'w-full' : 'w-[500px]'}`}>
       <div className="relative flex items-center">
         <div className="absolute left-3 flex items-center">
           <MapPin className="h-4 w-4 text-gray-400" />

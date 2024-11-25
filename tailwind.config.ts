@@ -25,14 +25,21 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#7029D9",
-          light: "#F4F1FB",
-          dark: "#5B21AE",
+          DEFAULT: "#2563eb",
+          light: "#dbeafe",
+          dark: "#1d4ed8",
         },
-        investment: {
-          high: "#22C55E",
-          medium: "#F59E0B",
-          low: "#EF4444",
+        gray: {
+          50: "#f9fafb",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          300: "#d1d5db",
+          400: "#9ca3af",
+          500: "#6b7280",
+          600: "#4b5563",
+          700: "#374151",
+          800: "#1f2937",
+          900: "#111827",
         },
       },
       fontFamily: {
@@ -51,6 +58,13 @@ export default {
       animation: {
         "fade-in": "fade-in 0.3s ease-out",
         "scale-in": "scale-in 0.2s ease-out",
+      },
+      borderRadius: {
+        'xl': 'var(--card-border-radius)',
+      },
+      height: {
+        'header': 'var(--header-height)',
+        'search': 'var(--search-height)',
       },
     },
   },

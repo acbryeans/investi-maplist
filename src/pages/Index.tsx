@@ -523,14 +523,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b fixed top-0 left-0 right-0 z-10">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
-            <h1 className="text-xl md:text-2xl font-bold text-primary">Picket</h1>
-            <p className="text-sm text-gray-600">Find Your Next Investment</p>
-            <div className="flex items-center justify-between gap-4 flex-1">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center gap-8">
+            <h1 className="text-2xl font-bold text-primary">Picket</h1>
+            <div className="flex-1">
               <SearchBar isMobile={isMobile} />
-              <ViewToggle view={view} onViewChange={setView} isMobile={isMobile} />
             </div>
+            <ViewToggle view={view} onViewChange={setView} isMobile={isMobile} />
           </div>
         </div>
       </header>

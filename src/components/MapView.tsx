@@ -32,17 +32,19 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
     zoomControl: true,
     styles: [
       {
-        featureType: "poi",
-        elementType: "labels",
+        featureType: "poi.business",
         stylers: [{ visibility: "off" }]
       },
       {
-        featureType: "business",
+        featureType: "poi.attraction",
         stylers: [{ visibility: "off" }]
       },
       {
-        featureType: "transit",
-        elementType: "labels.icon",
+        featureType: "poi.medical",
+        stylers: [{ visibility: "off" }]
+      },
+      {
+        featureType: "poi.school",
         stylers: [{ visibility: "off" }]
       }
     ]

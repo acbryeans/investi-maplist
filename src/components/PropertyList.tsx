@@ -47,7 +47,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               </div>
             </div>
           ) : view === "map" ? (
-            <div className="flex h-[calc(25vh-1rem)]">
+            <div className="flex container h-[calc(25vh-1rem)]">
               <div className="w-64">
                 <img 
                   src={property.image} 
@@ -57,13 +57,13 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               </div>
               <div className="flex-1 p-4">
                 <div className="mb-2">
-                  <div className="font-semibold text-primary text-[clamp(18px,1.6vw,32px)] mb-1">
+                  <div className="font-semibold text-primary text-[length:calc(1rem+1cqw)]">
                     {formatPrice(property.price)}
                   </div>
-                  <div className="text-gray-600 text-[clamp(14px,1.2vw,20px)] mb-1">
+                  <div className="text-gray-600 text-[length:calc(0.875rem+0.5cqw)] mb-1">
                     {property.address}
                   </div>
-                  <div className="flex gap-4 text-[clamp(13px,1.1vw,18px)] text-gray-500">
+                  <div className="flex gap-4 text-[length:calc(0.75rem+0.5cqw)] text-gray-500">
                     <span>{property.beds} beds</span>
                     <span>{property.baths} baths</span>
                     <span>{property.sqft.toLocaleString()} sqft</span>
@@ -71,24 +71,24 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 </div>
                 <div className="flex gap-6 mb-2">
                   <div>
-                    <div className="text-gray-500 text-[clamp(12px,1vw,16px)]">Cap Rate</div>
-                    <div className="font-semibold text-primary text-[clamp(16px,1.3vw,22px)]">
+                    <div className="text-gray-500 text-[length:calc(0.75rem+0.3cqw)]">Cap Rate</div>
+                    <div className="font-semibold text-primary text-[length:calc(0.875rem+0.5cqw)]">
                       {formatPercent(property.capRate)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-500 text-[clamp(12px,1vw,16px)]">Cash on Cash</div>
-                    <div className="font-semibold text-primary text-[clamp(16px,1.3vw,22px)]">
+                    <div className="text-gray-500 text-[length:calc(0.75rem+0.3cqw)]">Cash on Cash</div>
+                    <div className="font-semibold text-primary text-[length:calc(0.875rem+0.5cqw)]">
                       {formatPercent(property.cashOnCash)}
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-[clamp(4px,0.5vw,10px)] flex-wrap">
+                <div className="flex gap-2 flex-wrap">
                   {property.tags.map((tag) => (
                     <Badge 
                       key={tag}
                       variant="secondary"
-                      className={`text-[clamp(11px,1vw,15px)] py-[clamp(2px,0.3vw,4px)] px-[clamp(7px,0.6vw,12px)] ${
+                      className={`text-[length:calc(0.75rem+0.3cqw)] py-0.5 px-2 ${
                         tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                         tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                         tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :

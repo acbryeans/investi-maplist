@@ -69,16 +69,33 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
     return baseSize;
   };
 
-  const createCustomMarkerIcon = (size: number) => {
+  const formatMarkerPrice = (price: number) => {
+    if (price >= 1000000) {
+      return `${(price / 1000000).toFixed(1)}M`;
+    }
+    return `${Math.round(price / 1000)}k`;
+  };
+
+  const createCustomMarkerIcon = (price: number, size: number) => {
+    // Create a pill-shaped marker with the price
+    const markerPrice = formatMarkerPrice(price);
+    const width = Math.max(markerPrice.length * 8 + 16, 40); // Dynamic width based on text length
+    
     const svgMarker = {
-      path: "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z",
+      path: `M ${width},15 
+            a 15,15 0 0 1 -15,15 
+            h -${width - 30}
+            a 15,15 0 0 1 -15,-15 
+            a 15,15 0 0 1 15,-15 
+            h ${width - 30}
+            a 15,15 0 0 1 15,15 z`,
       fillColor: "#7029D9",
       fillOpacity: 1,
-      strokeWeight: 1,
-      strokeColor: "#5B21AE",
-      scale: size / 24,
-      anchor: new google.maps.Point(12, 24),
-      labelOrigin: new google.maps.Point(12, 9),
+      strokeWeight: 0,
+      rotation: 0,
+      scale: size / 30,
+      anchor: new google.maps.Point(width/2, 15),
+      labelOrigin: new google.maps.Point(width/2, 15),
     };
     return svgMarker;
   };
@@ -105,12 +122,13 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             key={property.id}
             position={{ lat: property.lat, lng: property.lng }}
             label={{
-              text: `$${(property.price / 1000).toFixed(0)}k`,
+              text: formatMarkerPrice(property.price),
               color: "white",
               fontSize: `${getMarkerSize(zoom)}px`,
               fontWeight: "bold",
+              className: "marker-label",
             }}
-            icon={createCustomMarkerIcon(getIconSize(zoom))}
+            icon={createCustomMarkerIcon(property.price, getIconSize(zoom))}
             onClick={() => {
               setSelectedProperty(property);
               onPropertyClick(property);

@@ -71,17 +71,19 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
           onCloseClick={() => setSelectedProperty(null)}
         >
-          <div className="min-w-[180px]">
-            <h4 className="font-semibold mb-1 text-sm">{selectedProperty.address}</h4>
-            <p className="text-primary font-semibold mb-1 text-sm">
+          <div className="w-full" style={{ minWidth: 'clamp(180px, 15vw, 250px)' }}>
+            <h4 className="font-semibold mb-0.5 text-[clamp(12px,1vw,14px)]">
+              {selectedProperty.address}
+            </h4>
+            <p className="text-primary font-semibold mb-0.5 text-[clamp(12px,1vw,14px)]">
               {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}
             </p>
-            <div className="flex gap-1 flex-wrap mb-1">
+            <div className="flex gap-[clamp(2px,0.3vw,4px)] flex-wrap mb-0.5">
               {selectedProperty.tags.map((tag) => (
                 <Badge 
                   key={tag}
                   variant="secondary"
-                  className={`text-[10px] py-0 px-1.5 ${
+                  className={`text-[clamp(8px,0.8vw,10px)] py-0 px-[clamp(3px,0.4vw,6px)] ${
                     tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                     tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                     tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
@@ -96,7 +98,11 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             </div>
             <button 
               onClick={() => onPropertyClick(selectedProperty)}
-              className="w-full bg-primary text-white px-2.5 py-1 rounded-md text-xs hover:bg-primary/90 transition-colors"
+              className="w-full bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+              style={{
+                fontSize: 'clamp(10px, 0.9vw, 12px)',
+                padding: 'clamp(2px, 0.5vw, 4px) clamp(6px, 0.8vw, 10px)',
+              }}
             >
               View Details
             </button>

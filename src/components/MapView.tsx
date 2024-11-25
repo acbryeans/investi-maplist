@@ -1,6 +1,7 @@
 import { useLoadScript, GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { useMemo, useState } from 'react';
 import { Property } from '@/types/property';
+import { Badge } from "@/components/ui/badge";
 
 interface MapViewProps {
   isMobile?: boolean;
@@ -70,11 +71,35 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
           onCloseClick={() => setSelectedProperty(null)}
         >
-          <div>
-            <h4>{selectedProperty.address}</h4>
-            <p>Price: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}</p>
-            <p>Tags: {selectedProperty.tags.join(', ')}</p>
-            <button onClick={() => onPropertyClick(selectedProperty)}>View Details</button>
+          <div className="min-w-[200px]">
+            <h4 className="font-semibold mb-2">{selectedProperty.address}</h4>
+            <p className="text-primary font-semibold mb-2">
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}
+            </p>
+            <div className="flex gap-1.5 flex-wrap mb-2">
+              {selectedProperty.tags.map((tag) => (
+                <Badge 
+                  key={tag}
+                  variant="secondary"
+                  className={`text-xs py-0.5 px-2 ${
+                    tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                    tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                    tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
+                    tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                    tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                    "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            <button 
+              onClick={() => onPropertyClick(selectedProperty)}
+              className="w-full bg-primary text-white px-3 py-1.5 rounded-md text-sm hover:bg-primary/90 transition-colors"
+            >
+              View Details
+            </button>
           </div>
         </InfoWindow>
       )}

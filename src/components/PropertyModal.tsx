@@ -23,13 +23,65 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${isMobile ? 'w-full h-full max-w-none m-0 rounded-none' : 'max-w-4xl h-[90vh]'} overflow-y-auto`}>
         <div className={`${isMobile ? 'flex flex-col' : 'grid grid-cols-2'} gap-8`}>
-          <div>
+          <div className="space-y-4">
             <img 
               src={property.image} 
               alt={property.address}
               className="w-full h-[400px] object-cover rounded-lg"
             />
+            <div className="flex gap-2 flex-wrap">
+              {property.tags.map((tag) => (
+                <Badge 
+                  key={tag}
+                  variant="secondary"
+                  className={`text-sm py-1 ${
+                    tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                    tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                    tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
+                    tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                    ""
+                  }`}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            
+            <div className="space-y-4 mt-4">
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="text-sm font-medium mb-2">Neighborhood Stats</h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">Walk Score</span>
+                    <span className="font-medium">85</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">Transit Score</span>
+                    <span className="font-medium">78</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">School Rating</span>
+                    <span className="font-medium">8/10</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="text-sm font-medium mb-2">Price History</h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Last Sold (2020)</span>
+                    <span className="font-medium">$680,000</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">5 Year Appreciation</span>
+                    <span className="font-medium text-green-600">+32%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          
           <div className="relative">
             <h2 className="text-3xl font-bold text-primary mb-2">
               {formatPrice(property.price)}
@@ -106,34 +158,18 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 </div>
               </div>
             </div>
-
-            <Button 
-              className="absolute bottom-0 right-0 gap-2"
-              size="lg"
-              variant="purple"
-            >
-              <BarChart2 size={18} />
-              Analyze
-            </Button>
           </div>
         </div>
 
-        <div className="flex gap-2 flex-wrap mt-4">
-          {property.tags.map((tag) => (
-            <Badge 
-              key={tag}
-              variant="secondary"
-              className={`text-sm py-1 ${
-                tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
-                tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                ""
-              }`}
-            >
-              {tag}
-            </Badge>
-          ))}
+        <div className="sticky bottom-0 left-0 right-0 mt-8 pb-4 pt-4 bg-white border-t">
+          <Button 
+            className="w-full gap-2"
+            size="lg"
+            variant="purple"
+          >
+            <BarChart2 size={18} />
+            Analyze Investment Opportunity
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

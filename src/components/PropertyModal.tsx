@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/types/property";
 import { BarChart2, TrendingUp, Activity, LineChart } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface PropertyModalProps {
   property: Property | null;
@@ -30,93 +29,138 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${isMobile ? 'w-full h-full max-w-none m-0 rounded-none' : 'max-w-4xl h-[90vh]'} overflow-y-auto`}>
-        <div className={`${isMobile ? 'flex flex-col' : 'grid grid-cols-2'} gap-8`}>
-          <div className="space-y-4">
+        {isMobile ? (
+          <div className="flex flex-col gap-6">
+            {/* Image */}
             <img 
               src={property.image} 
               alt={property.address}
-              className="w-full h-[400px] object-cover rounded-lg"
+              className="w-full h-[300px] object-cover rounded-lg -mt-2 -mx-2"
             />
             
-            <div className="flex gap-2 flex-wrap">
-              {property.tags.map((tag) => (
-                <Badge 
-                  key={tag}
-                  variant="secondary"
-                  className={`text-sm py-1 ${
-                    tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                    tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                    tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
-                    tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                    ""
-                  }`}
-                >
-                  {tag}
-                </Badge>
-              ))}
+            {/* Right side content first */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-3xl font-bold text-primary mb-2">
+                  {formatPrice(property.price)}
+                </h2>
+                <p className="text-lg text-gray-600 mb-4">{property.address}</p>
+                
+                {/* Property details */}
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <div className="text-sm text-gray-500">Beds</div>
+                    <div className="text-xl font-semibold">{property.beds}</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <div className="text-sm text-gray-500">Baths</div>
+                    <div className="text-xl font-semibold">{property.baths}</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <div className="text-sm text-gray-500">Sqft</div>
+                    <div className="text-xl font-semibold">{property.sqft.toLocaleString()}</div>
+                  </div>
+                </div>
+                
+                {/* Investment metrics */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="p-4 bg-primary-light rounded-lg">
+                    <div className="text-sm text-primary-dark">Cap Rate</div>
+                    <div className="text-2xl font-semibold text-primary">
+                      {formatPercent(property.capRate)}
+                    </div>
+                  </div>
+                  <div className="p-4 bg-primary-light rounded-lg">
+                    <div className="text-sm text-primary-dark">Cash on Cash</div>
+                    <div className="text-2xl font-semibold text-primary">
+                      {formatPercent(property.cashOnCash)}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Investment Details */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Investment Details</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Monthly Rent Est.</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.rentEstimate)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Repairs Est.</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.repairsEstimate)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Monthly Payment</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.financing.monthlyPayment)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Yearly Appreciation</div>
+                      <div className="text-lg font-semibold">{formatPercent(property.yearlyAppreciation)}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Comps */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Comparable Properties</h3>
+                  <div className="space-y-2">
+                    {property.comps.map((comp, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div>
+                          <div className="font-medium">{comp.address}</div>
+                          <div className="text-sm text-gray-500">
+                            {comp.sqft.toLocaleString()} sqft • Sold {new Date(comp.soldDate).toLocaleDateString()}
+                          </div>
+                        </div>
+                        <div className="font-semibold">{formatPrice(comp.price)}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/* Market Analysis Section */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
-              
-              <div className="space-y-3">
-                {/* Appreciation Forecast */}
-                <Tooltip>
-                  <TooltipTrigger className="w-full">
+            
+            {/* Left side content last */}
+            <div className="space-y-6">
+              {/* Market Analysis */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
+                
+                <div className="space-y-3">
+                  {/* Appreciation Forecast */}
+                  <div className="w-full">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="h-4 w-4 text-blue-500" />
-                        <span className="text-sm text-gray-600">5-Year Appreciation Forecast</span>
+                        <span className="text-sm text-gray-600">Appreciation Outlook</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-sm font-semibold text-blue-600">
-                          +{formatPercent(property.marketMetrics.appreciationForecast.fiveYear)}
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          ({formatPercent(property.marketMetrics.appreciationForecast.annual)} annual)
-                        </div>
+                      <div className="text-sm font-semibold text-blue-600">
+                        Better than Comparable Areas
                       </div>
                     </div>
                     <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-500 h-2 rounded-full" 
-                        style={{ width: `${Math.min(100, property.marketMetrics.appreciationForecast.fiveYear)}%` }}
-                      ></div>
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
                     </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-sm">Projected property value appreciation over the next 5 years based on market trends, economic indicators, and demographic data.</p>
-                  </TooltipContent>
-                </Tooltip>
+                  </div>
 
-                {/* Market Momentum */}
-                <Tooltip>
-                  <TooltipTrigger className="w-full">
+                  {/* Market Momentum */}
+                  <div className="w-full">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Activity className="h-4 w-4 text-purple-500" />
                         <span className="text-sm text-gray-600">Market Momentum</span>
                       </div>
-                      <div className={`text-sm font-semibold ${getMarketMomentumColor(property.marketMetrics.marketMomentum)}`}>
-                        {property.marketMetrics.marketMomentum}/10
+                      <div className="text-sm font-semibold text-purple-600">
+                        <svg className="h-5 w-5 rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
                       </div>
                     </div>
-                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-purple-500 h-2 rounded-full" 
-                        style={{ width: `${property.marketMetrics.marketMomentum * 10}%` }}
-                      ></div>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-sm">Current market strength based on sales velocity, price trends, and demand indicators in this area.</p>
-                  </TooltipContent>
-                </Tooltip>
+                  </div>
 
-                {/* Volatility Score */}
-                <Tooltip>
-                  <TooltipTrigger className="w-full">
+                  {/* Volatility Score */}
+                  <div className="w-full">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <LineChart className="h-4 w-4 text-emerald-500" />
@@ -137,127 +181,248 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                         property.marketMetrics.volatility === 'High' ? 'bg-red-500' : 'bg-gray-200'
                       }`}></div>
                     </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-sm">Historical price stability and risk assessment for this market area. Lower scores indicate more stable property values.</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </div>
-
-            <div className="space-y-4 mt-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="text-sm font-medium mb-2">Neighborhood Stats</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Walk Score</span>
-                    <span className="font-medium">85</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Transit Score</span>
-                    <span className="font-medium">78</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">School Rating</span>
-                    <span className="font-medium">8/10</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="text-sm font-medium mb-2">Price History</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Last Sold (2020)</span>
-                    <span className="font-medium">$680,000</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">5 Year Appreciation</span>
-                    <span className="font-medium text-green-600">+32%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="relative">
-            <h2 className="text-3xl font-bold text-primary mb-2">
-              {formatPrice(property.price)}
-            </h2>
-            <p className="text-lg text-gray-600 mb-4">{property.address}</p>
-            
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-sm text-gray-500">Beds</div>
-                <div className="text-xl font-semibold">{property.beds}</div>
-              </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-sm text-gray-500">Baths</div>
-                <div className="text-xl font-semibold">{property.baths}</div>
-              </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-sm text-gray-500">Sqft</div>
-                <div className="text-xl font-semibold">{property.sqft.toLocaleString()}</div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="p-4 bg-primary-light rounded-lg">
-                <div className="text-sm text-primary-dark">Cap Rate</div>
-                <div className="text-2xl font-semibold text-primary">
-                  {formatPercent(property.capRate)}
-                </div>
-              </div>
-              <div className="p-4 bg-primary-light rounded-lg">
-                <div className="text-sm text-primary-dark">Cash on Cash</div>
-                <div className="text-2xl font-semibold text-primary">
-                  {formatPercent(property.cashOnCash)}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Investment Details</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3 bg-gray-50 rounded-lg">
-                    <div className="text-sm text-gray-500">Monthly Rent Est.</div>
-                    <div className="text-lg font-semibold">{formatPrice(property.rentEstimate)}</div>
-                  </div>
-                  <div className="p-3 bg-gray-50 rounded-lg">
-                    <div className="text-sm text-gray-500">Repairs Est.</div>
-                    <div className="text-lg font-semibold">{formatPrice(property.repairsEstimate)}</div>
-                  </div>
-                  <div className="p-3 bg-gray-50 rounded-lg">
-                    <div className="text-sm text-gray-500">Monthly Payment</div>
-                    <div className="text-lg font-semibold">{formatPrice(property.financing.monthlyPayment)}</div>
-                  </div>
-                  <div className="p-3 bg-gray-50 rounded-lg">
-                    <div className="text-sm text-gray-500">Yearly Appreciation</div>
-                    <div className="text-lg font-semibold">{formatPercent(property.yearlyAppreciation)}</div>
                   </div>
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Comparable Properties</h3>
-                <div className="space-y-2">
-                  {property.comps.map((comp, index) => (
-                    <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                      <div>
-                        <div className="font-medium">{comp.address}</div>
-                        <div className="text-sm text-gray-500">
-                          {comp.sqft.toLocaleString()} sqft • Sold {new Date(comp.soldDate).toLocaleDateString()}
-                        </div>
-                      </div>
-                      <div className="font-semibold">{formatPrice(comp.price)}</div>
+              <div className="space-y-4 mt-4">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h4 className="text-sm font-medium mb-2">Neighborhood Stats</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Walk Score</span>
+                      <span className="font-medium">85</span>
                     </div>
-                  ))}
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Transit Score</span>
+                      <span className="font-medium">78</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">School Rating</span>
+                      <span className="font-medium">8/10</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h4 className="text-sm font-medium mb-2">Price History</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Last Sold (2020)</span>
+                      <span className="font-medium">$680,000</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">5 Year Appreciation</span>
+                      <span className="font-medium text-green-600">+32%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className={`${isMobile ? 'flex flex-col' : 'grid grid-cols-2'} gap-8`}>
+            <div className="space-y-4">
+              <img 
+                src={property.image} 
+                alt={property.address}
+                className="w-full h-[400px] object-cover rounded-lg"
+              />
+              
+              <div className="flex gap-2 flex-wrap">
+                {property.tags.map((tag) => (
+                  <Badge 
+                    key={tag}
+                    variant="secondary"
+                    className={`text-sm py-1 ${
+                      tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                      tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                      tag === "Cashflow" ? "bg-purple-100 text-purple-800" :
+                      tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                      ""
+                    }`}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Market Analysis Section */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
+                
+                <div className="space-y-3">
+                  {/* Appreciation Forecast */}
+                  <div className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4 text-blue-500" />
+                        <span className="text-sm text-gray-600">Appreciation Outlook</span>
+                      </div>
+                      <div className="text-sm font-semibold text-blue-600">
+                        Better than Comparable Areas
+                      </div>
+                    </div>
+                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
+                    </div>
+                  </div>
+
+                  {/* Market Momentum */}
+                  <div className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Activity className="h-4 w-4 text-purple-500" />
+                        <span className="text-sm text-gray-600">Market Momentum</span>
+                      </div>
+                      <div className="text-sm font-semibold text-purple-600">
+                        <svg className="h-5 w-5 rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Volatility Score */}
+                  <div className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <LineChart className="h-4 w-4 text-emerald-500" />
+                        <span className="text-sm text-gray-600">Market Volatility</span>
+                      </div>
+                      <div className="text-sm font-semibold text-emerald-600">
+                        {property.marketMetrics.volatility}
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex gap-1">
+                      <div className={`h-2 w-1/3 rounded-l-full ${
+                        property.marketMetrics.volatility === 'Low' ? 'bg-emerald-500' : 'bg-gray-200'
+                      }`}></div>
+                      <div className={`h-2 w-1/3 ${
+                        property.marketMetrics.volatility === 'Medium' ? 'bg-yellow-500' : 'bg-gray-200'
+                      }`}></div>
+                      <div className={`h-2 w-1/3 rounded-r-full ${
+                        property.marketMetrics.volatility === 'High' ? 'bg-red-500' : 'bg-gray-200'
+                      }`}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4 mt-4">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h4 className="text-sm font-medium mb-2">Neighborhood Stats</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Walk Score</span>
+                      <span className="font-medium">85</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Transit Score</span>
+                      <span className="font-medium">78</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">School Rating</span>
+                      <span className="font-medium">8/10</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h4 className="text-sm font-medium mb-2">Price History</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Last Sold (2020)</span>
+                      <span className="font-medium">$680,000</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">5 Year Appreciation</span>
+                      <span className="font-medium text-green-600">+32%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <h2 className="text-3xl font-bold text-primary mb-2">
+                {formatPrice(property.price)}
+              </h2>
+              <p className="text-lg text-gray-600 mb-4">{property.address}</p>
+              
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500">Beds</div>
+                  <div className="text-xl font-semibold">{property.beds}</div>
+                </div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500">Baths</div>
+                  <div className="text-xl font-semibold">{property.baths}</div>
+                </div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500">Sqft</div>
+                  <div className="text-xl font-semibold">{property.sqft.toLocaleString()}</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="p-4 bg-primary-light rounded-lg">
+                  <div className="text-sm text-primary-dark">Cap Rate</div>
+                  <div className="text-2xl font-semibold text-primary">
+                    {formatPercent(property.capRate)}
+                  </div>
+                </div>
+                <div className="p-4 bg-primary-light rounded-lg">
+                  <div className="text-sm text-primary-dark">Cash on Cash</div>
+                  <div className="text-2xl font-semibold text-primary">
+                    {formatPercent(property.cashOnCash)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Investment Details</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Monthly Rent Est.</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.rentEstimate)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Repairs Est.</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.repairsEstimate)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Monthly Payment</div>
+                      <div className="text-lg font-semibold">{formatPrice(property.financing.monthlyPayment)}</div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-sm text-gray-500">Yearly Appreciation</div>
+                      <div className="text-lg font-semibold">{formatPercent(property.yearlyAppreciation)}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Comparable Properties</h3>
+                  <div className="space-y-2">
+                    {property.comps.map((comp, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div>
+                          <div className="font-medium">{comp.address}</div>
+                          <div className="text-sm text-gray-500">
+                            {comp.sqft.toLocaleString()} sqft • Sold {new Date(comp.soldDate).toLocaleDateString()}
+                          </div>
+                        </div>
+                        <div className="font-semibold">{formatPrice(comp.price)}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="sticky bottom-0 left-0 right-0 mt-8 pb-4 pt-4 bg-white border-t">
           <Button 

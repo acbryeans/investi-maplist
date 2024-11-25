@@ -23,6 +23,8 @@ export interface Property {
     sqft: number;
     soldDate: string;
   }>;
+  lat: number;
+  lng: number;
   marketMetrics: {
     appreciationForecast: {
       fiveYear: number;
@@ -31,7 +33,7 @@ export interface Property {
     marketMomentum: number;
     volatility: 'Low' | 'Medium' | 'High';
   };
-  roi: {
+  roi?: {
     oneYear: number;
     fiveYear: number;
     tenYear: number;
@@ -41,10 +43,10 @@ export interface Property {
     averageRent: number;
     historicalAppreciation: number;
   };
-  propertyTaxes: number;
-  insuranceCost: number;
-  zoning: string;
-  propertyType: 'Single Family' | 'Multi Family' | 'Commercial' | 'Mixed Use';
+  propertyTaxes?: number;
+  insuranceCost?: number;
+  zoning?: string;
+  propertyType?: 'Single Family' | 'Multi Family' | 'Commercial' | 'Mixed Use';
   tenantProfile?: {
     currentTenants: number;
     averageTenureMonths: number;

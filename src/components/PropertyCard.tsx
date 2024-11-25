@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BarChart2, TrendingUp, DollarSign, Tool } from "lucide-react";
+import { BarChart2, TrendingUp, DollarSign, Wrench } from "lucide-react";
 import type { Property } from "@/types/property";
 import { CompareButton } from "@/components/CompareButton";
 
@@ -84,7 +84,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           
           <div className="bg-orange-50 p-3 rounded-lg">
             <div className="flex items-center gap-2">
-              <Tool className="h-4 w-4 text-orange-600" />
+              <Wrench className="h-4 w-4 text-orange-600" />
               <span className="text-sm text-orange-700">Repairs Needed</span>
             </div>
             <div className="text-xl font-semibold text-orange-700">
@@ -113,4 +113,4 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
       </div>
     </Card>
   );
-}
+};

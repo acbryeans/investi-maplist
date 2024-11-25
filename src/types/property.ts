@@ -23,6 +23,8 @@ export interface Property {
     sqft: number;
     soldDate: string;
   }>;
+  lat: number;
+  lng: number;
   marketMetrics: {
     appreciationForecast: {
       fiveYear: number;

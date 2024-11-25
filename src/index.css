@@ -26,15 +26,25 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --card-hover-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    --card-border-radius: 12px;
+    --search-height: 48px;
+    --header-height: 72px;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-gray-50 text-foreground font-sans antialiased;
   }
 }
 
 .property-card {
-  @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer;
+  @apply bg-white rounded-[var(--card-border-radius)] border border-gray-100 overflow-hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.property-card:hover {
+  box-shadow: var(--card-hover-shadow);
+  transform: translateY(-2px);
 }
 
 .investment-tag {

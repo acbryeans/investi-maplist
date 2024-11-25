@@ -16,160 +16,62 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   const formatPercent = (value: number) => `${value.toFixed(1)}%`;
 
   return (
-    <div className={`space-y-4 ${view === "map" ? "h-[calc(100vh-10rem)] overflow-y-auto" : ""}`}>
+    <div className={`space-y-6 ${view === "map" ? "h-[calc(100vh-5rem)] overflow-y-auto px-4" : ""}`}>
       {properties.map((property) => (
         <div
           key={property.id}
           onClick={() => onPropertyClick(property)}
-          className="property-card bg-white hover:bg-gray-50 transition-all duration-200 cursor-pointer border rounded-lg"
+          className="property-card bg-white hover:shadow-lg transition-all duration-200 cursor-pointer rounded-xl overflow-hidden border border-gray-100"
         >
-          {isMobile ? (
-            <div className="flex p-4">
-              <div className="w-24 h-24">
-                <img 
-                  src={property.image} 
-                  alt={property.address}
-                  className="h-full w-full object-cover rounded"
-                />
+          <div className="flex h-[180px]">
+            <div className="w-[280px] relative">
+              <img 
+                src={property.image} 
+                alt={property.address}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold">
+                {formatPrice(property.price)}
               </div>
-              <div className="flex-1 ml-4">
-                <div className="font-semibold text-primary text-lg">
-                  {formatPrice(property.price)}
-                </div>
-                <div className="text-sm text-gray-600 mb-1">
+            </div>
+            <div className="flex-1 p-4">
+              <div className="space-y-3">
+                <div className="text-lg font-medium text-gray-900">
                   {property.address}
                 </div>
-                <div className="text-sm text-gray-500">
-                  {property.beds}b {property.baths}ba • {property.sqft.toLocaleString()}sf
+                <div className="flex gap-4 text-sm text-gray-600">
+                  <span>{property.beds} beds</span>
+                  <span>{property.baths} baths</span>
+                  <span>{property.sqft.toLocaleString()} sqft</span>
                 </div>
-                <div className="text-sm text-primary mt-1">
-                  {formatPercent(property.capRate)} Cap
-                </div>
-              </div>
-            </div>
-          ) : view === "map" ? (
-            <div className="flex h-[calc(25vh-1rem)] min-h-[150px] max-h-[300px] overflow-hidden">
-              <div className="w-1/3 min-w-[100px] max-w-[200px]">
-                <img 
-                  src={property.image} 
-                  alt={property.address}
-                  className="h-full w-full object-cover rounded-l-lg"
-                />
-              </div>
-              <div className="flex-1 p-3 overflow-hidden">
-                <div className="grid gap-1 h-full">
-                  <div className="overflow-hidden">
-                    <div className="font-semibold text-primary text-[length:calc(1rem+0.2cqw)] truncate">
-                      {formatPrice(property.price)}
-                    </div>
-                    <div className="text-gray-600 text-[length:calc(0.85rem+0.1cqw)] truncate">
-                      {property.address}
-                    </div>
-                    <div className="flex gap-2 text-[length:calc(0.8rem+0.1cqw)] text-gray-500">
-                      <span>{property.beds} beds</span>
-                      <span>{property.baths} baths</span>
-                      <span>{property.sqft.toLocaleString()} sqft</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    <div>
-                      <div className="text-gray-500 text-[length:calc(0.8rem+0.1cqw)]">Cap Rate</div>
-                      <div className="font-semibold text-primary text-[length:calc(0.85rem+0.1cqw)]">
-                        {formatPercent(property.capRate)}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-gray-500 text-[length:calc(0.8rem+0.1cqw)]">Cash on Cash</div>
-                      <div className="font-semibold text-primary text-[length:calc(0.85rem+0.1cqw)]">
-                        {formatPercent(property.cashOnCash)}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-1 flex-wrap overflow-hidden">
-                    {property.tags.map((tag) => (
-                      <Badge 
-                        key={tag}
-                        variant="secondary"
-                        className={`text-[length:calc(0.8rem+0.1cqw)] py-0.5 px-1.5 whitespace-nowrap ${
-                          tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                          tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                          tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                          tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                          tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                          "bg-gray-100 text-gray-800"
-                        }`}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex h-32">
-              <div className="w-48">
-                <img 
-                  src={property.image} 
-                  alt={property.address}
-                  className="h-full w-full object-cover rounded-l-lg"
-                />
-              </div>
-              <div className="flex-1 p-4">
-                <div className="flex justify-between items-start">
+                <div className="flex gap-6">
                   <div>
-                    <div className="font-semibold text-primary text-xl mb-1">
-                      {formatPrice(property.price)}
-                    </div>
-                    <div className="text-gray-600 mb-1">
-                      {property.address}
-                    </div>
-                    <div className="flex gap-1.5 flex-wrap">
-                      {property.tags.map((tag) => (
-                        <Badge 
-                          key={tag}
-                          variant="secondary"
-                          className={`text-xs py-0.5 px-2 ${
-                            tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                            tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                            tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                            tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                            tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                            "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
+                    <div className="text-sm text-gray-500">Cap Rate</div>
+                    <div className="font-semibold text-primary">
+                      {formatPercent(property.capRate)}
                     </div>
                   </div>
-                  <div className="flex items-center gap-8">
-                    <div className="flex gap-4 text-sm text-gray-500">
-                      <span>{property.beds} beds</span>
-                      <span>{property.baths} baths</span>
-                      <span>{property.sqft.toLocaleString()} sqft</span>
-                    </div>
-                    <div className="flex gap-6">
-                      <div>
-                        <div className="text-sm text-gray-500">Cap Rate</div>
-                        <div className="font-semibold text-primary">
-                          {formatPercent(property.capRate)}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500">Cash on Cash</div>
-                        <div className="font-semibold text-primary">
-                          {formatPercent(property.cashOnCash)}
-                        </div>
-                      </div>
+                  <div>
+                    <div className="text-sm text-gray-500">Cash on Cash</div>
+                    <div className="font-semibold text-primary">
+                      {formatPercent(property.cashOnCash)}
                     </div>
                   </div>
                 </div>
+                <div className="flex gap-2">
+                  {property.tags.map((tag) => (
+                    <Badge 
+                      key={tag}
+                      variant="secondary"
+                      className="bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>

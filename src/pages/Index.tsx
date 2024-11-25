@@ -90,8 +90,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
-    lat: 30.2829,
-    lng: -97.7344,
+    lat: 30.2845,
+    lng: -97.7392,
   },
   {
     id: "3",
@@ -132,8 +132,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
-    lat: 30.2629,
-    lng: -97.7544,
+    lat: 30.2651,
+    lng: -97.7489,
   },
   {
     id: "4",
@@ -174,8 +174,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
-    lat: 30.2929,
-    lng: -97.7244,
+    lat: 30.2798,
+    lng: -97.7512,
   },
   {
     id: "5",
@@ -216,8 +216,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-08",
       },
     ],
-    lat: 30.2529,
-    lng: -97.7644,
+    lat: 30.2705,
+    lng: -97.7378,
   },
   {
     id: "6",
@@ -258,8 +258,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-02",
       },
     ],
-    lat: 30.2779,
-    lng: -97.7394,
+    lat: 30.2892,
+    lng: -97.7456,
   },
   {
     id: "7",
@@ -300,8 +300,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-15",
       },
     ],
-    lat: 30.2679,
-    lng: -97.7494,
+    lat: 30.2763,
+    lng: -97.7298,
   },
   {
     id: "8",
@@ -342,8 +342,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2023-12-28",
       },
     ],
-    lat: 30.2879,
-    lng: -97.7294,
+    lat: 30.2671,
+    lng: -97.7401,
   },
   {
     id: "9",
@@ -384,8 +384,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-05",
       },
     ],
-    lat: 30.2579,
-    lng: -97.7594,
+    lat: 30.2819,
+    lng: -97.7534,
   },
   {
     id: "10",
@@ -426,8 +426,8 @@ const MOCK_PROPERTIES: Property[] = [
         soldDate: "2024-01-10",
       },
     ],
-    lat: 30.2979,
-    lng: -97.7194,
+    lat: 30.2734,
+    lng: -97.7289,
   },
 ];
 

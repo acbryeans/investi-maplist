@@ -54,10 +54,6 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
 
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="text-center mb-4">
-        <h1 className="text-primary text-4xl font-bold">Picket</h1>
-        <p className="text-primary/80 text-sm">Find Your Next Investment</p>
-      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}

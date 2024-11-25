@@ -37,6 +37,7 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
               alt={property.address}
               className="w-full h-[400px] object-cover rounded-lg"
             />
+            
             <div className="flex gap-2 flex-wrap">
               {property.tags.map((tag) => (
                 <Badge 
@@ -54,7 +55,96 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 </Badge>
               ))}
             </div>
-            
+
+            {/* Market Analysis Section */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
+              
+              <div className="space-y-3">
+                {/* Appreciation Forecast */}
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4 text-blue-500" />
+                        <span className="text-sm text-gray-600">5-Year Appreciation Forecast</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-sm font-semibold text-blue-600">
+                          +{formatPercent(property.marketMetrics.appreciationForecast.fiveYear)}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          ({formatPercent(property.marketMetrics.appreciationForecast.annual)} annual)
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-blue-500 h-2 rounded-full" 
+                        style={{ width: `${Math.min(100, property.marketMetrics.appreciationForecast.fiveYear)}%` }}
+                      ></div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-sm">Projected property value appreciation over the next 5 years based on market trends, economic indicators, and demographic data.</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Market Momentum */}
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Activity className="h-4 w-4 text-purple-500" />
+                        <span className="text-sm text-gray-600">Market Momentum</span>
+                      </div>
+                      <div className={`text-sm font-semibold ${getMarketMomentumColor(property.marketMetrics.marketMomentum)}`}>
+                        {property.marketMetrics.marketMomentum}/10
+                      </div>
+                    </div>
+                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-purple-500 h-2 rounded-full" 
+                        style={{ width: `${property.marketMetrics.marketMomentum * 10}%` }}
+                      ></div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-sm">Current market strength based on sales velocity, price trends, and demand indicators in this area.</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Volatility Score */}
+                <Tooltip>
+                  <TooltipTrigger className="w-full">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <LineChart className="h-4 w-4 text-emerald-500" />
+                        <span className="text-sm text-gray-600">Market Volatility</span>
+                      </div>
+                      <div className="text-sm font-semibold text-emerald-600">
+                        {property.marketMetrics.volatility}
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex gap-1">
+                      <div className={`h-2 w-1/3 rounded-l-full ${
+                        property.marketMetrics.volatility === 'Low' ? 'bg-emerald-500' : 'bg-gray-200'
+                      }`}></div>
+                      <div className={`h-2 w-1/3 ${
+                        property.marketMetrics.volatility === 'Medium' ? 'bg-yellow-500' : 'bg-gray-200'
+                      }`}></div>
+                      <div className={`h-2 w-1/3 rounded-r-full ${
+                        property.marketMetrics.volatility === 'High' ? 'bg-red-500' : 'bg-gray-200'
+                      }`}></div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-sm">Historical price stability and risk assessment for this market area. Lower scores indicate more stable property values.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </div>
+
             <div className="space-y-4 mt-4">
               <div className="bg-gray-50 rounded-lg p-4">
                 <h4 className="text-sm font-medium mb-2">Neighborhood Stats</h4>

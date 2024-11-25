@@ -23,4 +23,12 @@ export interface Property {
     sqft: number;
     soldDate: string;
   }>;
+  marketMetrics: {
+    appreciationForecast: {
+      fiveYear: number;
+      annual: number;
+    };
+    marketMomentum: number;
+    volatility: 'Low' | 'Medium' | 'High';
+  };
 }

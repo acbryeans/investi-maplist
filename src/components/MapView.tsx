@@ -71,19 +71,19 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
           onCloseClick={() => setSelectedProperty(null)}
         >
-          <div className="w-full" style={{ minWidth: 'clamp(180px, 15vw, 250px)' }}>
-            <h4 className="font-semibold mb-0.5 text-[clamp(12px,1vw,14px)]">
+          <div className="w-full" style={{ minWidth: 'clamp(160px, 20vw, 300px)' }}>
+            <h4 className="font-semibold mb-0.5 text-[clamp(10px,1.2vw,16px)]">
               {selectedProperty.address}
             </h4>
-            <p className="text-primary font-semibold mb-0.5 text-[clamp(12px,1vw,14px)]">
+            <p className="text-primary font-semibold mb-0.5 text-[clamp(10px,1.2vw,16px)]">
               {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}
             </p>
-            <div className="flex gap-[clamp(2px,0.3vw,4px)] flex-wrap mb-0.5">
+            <div className="flex gap-[clamp(1px,0.2vw,3px)] flex-wrap mb-0.5">
               {selectedProperty.tags.map((tag) => (
                 <Badge 
                   key={tag}
                   variant="secondary"
-                  className={`text-[clamp(8px,0.8vw,10px)] py-0 px-[clamp(3px,0.4vw,6px)] ${
+                  className={`text-[clamp(7px,0.9vw,12px)] py-0 px-[clamp(2px,0.3vw,4px)] ${
                     tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                     tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                     tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
@@ -100,8 +100,8 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
               onClick={() => onPropertyClick(selectedProperty)}
               className="w-full bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
               style={{
-                fontSize: 'clamp(10px, 0.9vw, 12px)',
-                padding: 'clamp(2px, 0.5vw, 4px) clamp(6px, 0.8vw, 10px)',
+                fontSize: 'clamp(8px, 1vw, 14px)',
+                padding: 'clamp(1px, 0.4vw, 4px) clamp(4px, 0.6vw, 8px)',
               }}
             >
               View Details

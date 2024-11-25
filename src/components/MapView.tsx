@@ -30,6 +30,22 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   const options = useMemo(() => ({
     disableDefaultUI: false,
     zoomControl: true,
+    styles: [
+      {
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [{ visibility: "off" }]
+      },
+      {
+        featureType: "business",
+        stylers: [{ visibility: "off" }]
+      },
+      {
+        featureType: "transit",
+        elementType: "labels.icon",
+        stylers: [{ visibility: "off" }]
+      }
+    ]
   }), []);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -47,6 +63,20 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
     // Base marker size that scales with zoom
     const baseSize = Math.max(20, Math.min(32, zoomLevel * 2));
     return baseSize;
+  };
+
+  const createCustomMarkerIcon = (size: number) => {
+    const svgMarker = {
+      path: "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z",
+      fillColor: "#7029D9",
+      fillOpacity: 1,
+      strokeWeight: 1,
+      strokeColor: "#5B21AE",
+      scale: size / 24,
+      anchor: new google.maps.Point(12, 24),
+      labelOrigin: new google.maps.Point(12, 9),
+    };
+    return svgMarker;
   };
 
   if (loadError) return <div>Error loading maps</div>;
@@ -76,14 +106,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
               fontSize: `${getMarkerSize(zoom)}px`,
               fontWeight: "bold",
             }}
-            icon={{
-              url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-              labelOrigin: new window.google.maps.Point(15, 10),
-              scaledSize: new window.google.maps.Size(
-                getIconSize(zoom),
-                getIconSize(zoom)
-              ),
-            }}
+            icon={createCustomMarkerIcon(getIconSize(zoom))}
             onClick={() => {
               setSelectedProperty(property);
               onPropertyClick(property);

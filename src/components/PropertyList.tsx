@@ -47,59 +47,63 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               </div>
             </div>
           ) : view === "map" ? (
-            <div className="flex container h-[calc(25vh-1rem)]">
-              <div className="w-64">
+            <div className="flex h-[calc(25vh-1rem)] min-h-[150px] max-h-[300px] overflow-hidden">
+              <div className="w-1/3 min-w-[100px] max-w-[200px]">
                 <img 
                   src={property.image} 
                   alt={property.address}
                   className="h-full w-full object-cover rounded-l-lg"
                 />
               </div>
-              <div className="flex-1 p-4">
-                <div className="mb-2">
-                  <div className="font-semibold text-primary text-[length:calc(0.875rem+0.3cqw)]">
-                    {formatPrice(property.price)}
-                  </div>
-                  <div className="text-gray-600 text-[length:calc(0.75rem+0.2cqw)] mb-1">
-                    {property.address}
-                  </div>
-                  <div className="flex gap-4 text-[length:calc(0.7rem+0.2cqw)] text-gray-500">
-                    <span>{property.beds} beds</span>
-                    <span>{property.baths} baths</span>
-                    <span>{property.sqft.toLocaleString()} sqft</span>
-                  </div>
-                </div>
-                <div className="flex gap-6 mb-2">
-                  <div>
-                    <div className="text-gray-500 text-[length:calc(0.7rem+0.1cqw)]">Cap Rate</div>
-                    <div className="font-semibold text-primary text-[length:calc(0.75rem+0.2cqw)]">
-                      {formatPercent(property.capRate)}
+              <div className="flex-1 p-3 overflow-hidden">
+                <div className="grid gap-1 h-full">
+                  <div className="overflow-hidden">
+                    <div className="font-semibold text-primary text-[length:calc(0.8rem+0.2cqw)] truncate">
+                      {formatPrice(property.price)}
+                    </div>
+                    <div className="text-gray-600 text-[length:calc(0.7rem+0.1cqw)] truncate">
+                      {property.address}
+                    </div>
+                    <div className="flex gap-2 text-[length:calc(0.65rem+0.1cqw)] text-gray-500">
+                      <span>{property.beds} beds</span>
+                      <span>{property.baths} baths</span>
+                      <span>{property.sqft.toLocaleString()} sqft</span>
                     </div>
                   </div>
-                  <div>
-                    <div className="text-gray-500 text-[length:calc(0.7rem+0.1cqw)]">Cash on Cash</div>
-                    <div className="font-semibold text-primary text-[length:calc(0.75rem+0.2cqw)]">
-                      {formatPercent(property.cashOnCash)}
+                  
+                  <div className="flex gap-4">
+                    <div>
+                      <div className="text-gray-500 text-[length:calc(0.65rem+0.1cqw)]">Cap Rate</div>
+                      <div className="font-semibold text-primary text-[length:calc(0.7rem+0.1cqw)]">
+                        {formatPercent(property.capRate)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-500 text-[length:calc(0.65rem+0.1cqw)]">Cash on Cash</div>
+                      <div className="font-semibold text-primary text-[length:calc(0.7rem+0.1cqw)]">
+                        {formatPercent(property.cashOnCash)}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex gap-2 flex-wrap">
-                  {property.tags.map((tag) => (
-                    <Badge 
-                      key={tag}
-                      variant="secondary"
-                      className={`text-[length:calc(0.7rem+0.1cqw)] py-0.5 px-2 ${
-                        tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                        tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                        tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                        tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                        tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                        "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
+                  
+                  <div className="flex gap-1 flex-wrap overflow-hidden">
+                    {property.tags.map((tag) => (
+                      <Badge 
+                        key={tag}
+                        variant="secondary"
+                        className={`text-[length:calc(0.65rem+0.1cqw)] py-0.5 px-1.5 whitespace-nowrap ${
+                          tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                          tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                          tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
+                          tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                          tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
+                          "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

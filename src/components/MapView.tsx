@@ -126,12 +126,17 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
               color: "white",
               fontSize: `${getMarkerSize(zoom)}px`,
               fontWeight: "bold",
-              className: "marker-label",
             }}
             icon={createCustomMarkerIcon(property.price, getIconSize(zoom))}
             onClick={() => {
-              setSelectedProperty(property);
-              onPropertyClick(property);
+              if (selectedProperty?.id === property.id) {
+                // If same property is clicked twice, open the full modal
+                onPropertyClick(property);
+                setSelectedProperty(null);
+              } else {
+                // First click, show the info window
+                setSelectedProperty(property);
+              }
             }}
           />
         ))}
@@ -141,41 +146,47 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
             onCloseClick={() => setSelectedProperty(null)}
           >
-            <div className="w-full" style={{ minWidth: 'clamp(140px, 18vw, 280px)' }}>
-              <h4 className="font-semibold mb-0.5 text-[clamp(8px,0.9vw,14px)]">
-                {selectedProperty.address}
-              </h4>
-              <p className="text-primary font-semibold mb-0.5 text-[clamp(8px,0.9vw,14px)]">
-                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}
-              </p>
-              <div className="flex gap-[clamp(1px,0.15vw,2px)] flex-wrap mb-0.5">
-                {selectedProperty.tags.map((tag) => (
-                  <Badge 
-                    key={tag}
-                    variant="secondary"
-                    className={`text-[clamp(6px,0.7vw,10px)] py-0 px-[clamp(1px,0.2vw,3px)] ${
-                      tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                      tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                      tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                      tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                      tag === "Long Time on Market" ? "bg-red-100 text-red-800" :
-                      "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
+            <div className="flex h-[200px] w-[400px]">
+              <div className="w-1/3">
+                <img 
+                  src={selectedProperty.image} 
+                  alt={selectedProperty.address}
+                  className="h-full w-full object-cover rounded-l"
+                />
               </div>
-              <button 
-                onClick={() => onPropertyClick(selectedProperty)}
-                className="w-full bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-                style={{
-                  fontSize: 'clamp(7px, 0.8vw, 12px)',
-                  padding: 'clamp(1px, 0.3vw, 3px) clamp(2px, 0.4vw, 6px)',
-                }}
-              >
-                View Details
-              </button>
+              <div className="flex-1 p-3">
+                <div className="mb-2">
+                  <div className="font-semibold text-primary text-lg">
+                    {new Intl.NumberFormat('en-US', { 
+                      style: 'currency', 
+                      currency: 'USD',
+                      maximumFractionDigits: 0 
+                    }).format(selectedProperty.price)}
+                  </div>
+                  <div className="text-gray-600 text-sm mb-1">
+                    {selectedProperty.address}
+                  </div>
+                  <div className="flex gap-2 text-sm text-gray-500">
+                    <span>{selectedProperty.beds} beds</span>
+                    <span>{selectedProperty.baths} baths</span>
+                    <span>{selectedProperty.sqft.toLocaleString()} sqft</span>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div>
+                    <div className="text-xs text-gray-500">Cap Rate</div>
+                    <div className="font-semibold text-primary">
+                      {selectedProperty.capRate.toFixed(1)}%
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500">Cash on Cash</div>
+                    <div className="font-semibold text-primary">
+                      {selectedProperty.cashOnCash.toFixed(1)}%
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </InfoWindow>
         )}

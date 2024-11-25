@@ -18,6 +18,22 @@ const getMarketMomentumColor = (score: number) => {
   return "text-red-500";
 };
 
+const getAppreciationArrow = (forecast: number) => {
+  if (forecast >= 8) return "↑";
+  if (forecast >= 4) return "↗";
+  if (forecast >= 0) return "→";
+  if (forecast >= -4) return "↘";
+  return "↓";
+};
+
+const getAppreciationText = (forecast: number) => {
+  if (forecast >= 8) return "Much better than comparable areas";
+  if (forecast >= 4) return "Better than comparable areas";
+  if (forecast >= 0) return "Similar to comparable areas";
+  if (forecast >= -4) return "Worse than comparable areas";
+  return "Much worse than comparable areas";
+};
+
 export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyModalProps) => {
   if (!property) return null;
 
@@ -128,19 +144,19 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
                 
                 <div className="space-y-3">
-                  {/* Appreciation Forecast */}
-                  <div className="w-full">
+                  {/* Appreciation Outlook */}
+                  <div className="w-full group relative">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="h-4 w-4 text-blue-500" />
                         <span className="text-sm text-gray-600">Appreciation Outlook</span>
                       </div>
-                      <div className="text-sm font-semibold text-blue-600">
-                        Better than Comparable Areas
+                      <div className="text-2xl font-semibold text-blue-600">
+                        {getAppreciationArrow(property.marketMetrics.appreciationForecast.fiveYear)}
                       </div>
                     </div>
-                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
+                    <div className="invisible group-hover:visible absolute right-0 mt-1 bg-gray-900 text-white text-xs rounded py-1 px-2">
+                      {getAppreciationText(property.marketMetrics.appreciationForecast.fiveYear)}
                     </div>
                   </div>
 
@@ -151,10 +167,8 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                         <Activity className="h-4 w-4 text-purple-500" />
                         <span className="text-sm text-gray-600">Market Momentum</span>
                       </div>
-                      <div className="text-sm font-semibold text-purple-600">
-                        <svg className="h-5 w-5 rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                        </svg>
+                      <div className="text-2xl font-semibold text-purple-600">
+                        {getAppreciationArrow(property.marketMetrics.marketMomentum)}
                       </div>
                     </div>
                   </div>
@@ -252,19 +266,19 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 <h4 className="text-sm font-medium mb-3">Market Analysis</h4>
                 
                 <div className="space-y-3">
-                  {/* Appreciation Forecast */}
-                  <div className="w-full">
+                  {/* Appreciation Outlook */}
+                  <div className="w-full group relative">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="h-4 w-4 text-blue-500" />
                         <span className="text-sm text-gray-600">Appreciation Outlook</span>
                       </div>
-                      <div className="text-sm font-semibold text-blue-600">
-                        Better than Comparable Areas
+                      <div className="text-2xl font-semibold text-blue-600">
+                        {getAppreciationArrow(property.marketMetrics.appreciationForecast.fiveYear)}
                       </div>
                     </div>
-                    <div className="mt-1.5 w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
+                    <div className="invisible group-hover:visible absolute right-0 mt-1 bg-gray-900 text-white text-xs rounded py-1 px-2">
+                      {getAppreciationText(property.marketMetrics.appreciationForecast.fiveYear)}
                     </div>
                   </div>
 
@@ -275,10 +289,8 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                         <Activity className="h-4 w-4 text-purple-500" />
                         <span className="text-sm text-gray-600">Market Momentum</span>
                       </div>
-                      <div className="text-sm font-semibold text-purple-600">
-                        <svg className="h-5 w-5 rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                        </svg>
+                      <div className="text-2xl font-semibold text-purple-600">
+                        {getAppreciationArrow(property.marketMetrics.marketMomentum)}
                       </div>
                     </div>
                   </div>

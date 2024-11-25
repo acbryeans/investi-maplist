@@ -534,10 +534,10 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="pt-[5.5rem]">
+      <main className="pt-[5.5rem] w-full">
         {view === "map" ? (
-          <div className="h-[calc(100vh-5.5rem)]">
-            <div className={`${isMobile ? 'w-full h-full' : 'flex'}`}>
+          <div className="h-[calc(100vh-5.5rem)] w-full">
+            <div className={`${isMobile ? 'w-full h-full' : 'flex w-full'}`}>
               <div className={`${isMobile ? 'hidden' : 'w-[520px] overflow-y-auto h-[calc(100vh-5.5rem)] border-r'}`}>
                 <PropertyList 
                   properties={MOCK_PROPERTIES} 
@@ -555,7 +555,7 @@ const Index = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className="w-full">
             <PropertyList 
               properties={MOCK_PROPERTIES} 
               onPropertyClick={setSelectedProperty}

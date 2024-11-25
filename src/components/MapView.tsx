@@ -58,14 +58,14 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   });
 
   const getMarkerSize = (zoomLevel: number) => {
-    // Base size that scales with zoom
-    const baseSize = Math.max(8, Math.min(14, zoomLevel * 0.8));
+    // Increase base text size
+    const baseSize = Math.max(12, Math.min(16, zoomLevel * 1.2));
     return baseSize;
   };
 
   const getIconSize = (zoomLevel: number) => {
-    // Base marker size that scales with zoom
-    const baseSize = Math.max(20, Math.min(32, zoomLevel * 2));
+    // Increase base marker size
+    const baseSize = Math.max(30, Math.min(45, zoomLevel * 2.5));
     return baseSize;
   };
 

@@ -536,9 +536,9 @@ const Index = () => {
 
       <main className="pt-[5.5rem]">
         {view === "map" ? (
-          <div className="relative h-[calc(100vh-4.5rem)]">
-            <div className={`${isMobile ? 'w-full h-full' : 'flex gap-8 px-8 py-8'}`}>
-              <div className={`${isMobile ? 'hidden' : 'w-[520px] overflow-y-auto max-h-[calc(100vh-8rem)]'}`}>
+          <div className="h-[calc(100vh-5.5rem)]">
+            <div className={`${isMobile ? 'w-full h-full' : 'flex'}`}>
+              <div className={`${isMobile ? 'hidden' : 'w-[520px] overflow-y-auto h-[calc(100vh-5.5rem)] border-r'}`}>
                 <PropertyList 
                   properties={MOCK_PROPERTIES} 
                   onPropertyClick={setSelectedProperty}
@@ -555,15 +555,13 @@ const Index = () => {
             </div>
           </div>
         ) : (
-          <div className="max-w-[1920px] mx-auto px-8 py-8">
-            <div className="bg-white rounded-lg shadow p-4">
-              <PropertyList 
-                properties={MOCK_PROPERTIES} 
-                onPropertyClick={setSelectedProperty}
-                view={view}
-                isMobile={isMobile}
-              />
-            </div>
+          <div>
+            <PropertyList 
+              properties={MOCK_PROPERTIES} 
+              onPropertyClick={setSelectedProperty}
+              view={view}
+              isMobile={isMobile}
+            />
           </div>
         )}
       </main>

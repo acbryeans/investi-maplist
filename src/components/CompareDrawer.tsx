@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCompare } from "@/contexts/CompareContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";

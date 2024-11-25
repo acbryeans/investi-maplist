@@ -1,3 +1,4 @@
+import React from 'react';
 import { Property } from "@/types/property";
 import { Badge } from "@/components/ui/badge";
 

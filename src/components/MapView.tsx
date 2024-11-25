@@ -129,14 +129,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             }}
             icon={createCustomMarkerIcon(property.price, getIconSize(zoom))}
             onClick={() => {
-              if (selectedProperty?.id === property.id) {
-                // If same property is clicked twice, open the full modal
-                onPropertyClick(property);
-                setSelectedProperty(null);
-              } else {
-                // First click, show the info window
-                setSelectedProperty(property);
-              }
+              setSelectedProperty(property);
             }}
           />
         ))}
@@ -146,7 +139,13 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
             onCloseClick={() => setSelectedProperty(null)}
           >
-            <div className="flex h-[200px] w-[400px]">
+            <div 
+              className="flex h-[200px] w-[400px] cursor-pointer hover:bg-gray-50 transition-colors"
+              onClick={() => {
+                onPropertyClick(selectedProperty);
+                setSelectedProperty(null);
+              }}
+            >
               <div className="w-1/3">
                 <img 
                   src={selectedProperty.image} 

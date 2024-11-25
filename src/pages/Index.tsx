@@ -50,6 +50,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2729,
     lng: -97.7444,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "2",
@@ -92,6 +100,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2845,
     lng: -97.7392,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "3",
@@ -134,6 +150,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2651,
     lng: -97.7489,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "4",
@@ -176,6 +200,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2798,
     lng: -97.7512,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "5",
@@ -218,6 +250,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2705,
     lng: -97.7378,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "6",
@@ -260,6 +300,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2892,
     lng: -97.7456,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "7",
@@ -302,6 +350,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2763,
     lng: -97.7298,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "8",
@@ -344,6 +400,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2671,
     lng: -97.7401,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "9",
@@ -386,6 +450,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2819,
     lng: -97.7534,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
   {
     id: "10",
@@ -428,6 +500,14 @@ const MOCK_PROPERTIES: Property[] = [
     ],
     lat: 30.2734,
     lng: -97.7289,
+    marketMetrics: {
+      appreciationForecast: {
+        fiveYear: 42,
+        annual: 8.4
+      },
+      marketMomentum: 8.5,
+      volatility: 'Low'
+    },
   },
 ];
 

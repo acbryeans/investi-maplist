@@ -14,7 +14,7 @@ const libraries = ['places'];
 export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps) => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(14);
 
   const mapContainerStyle = useMemo(() => ({
     width: '100%',
@@ -107,7 +107,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
     <div className="flex flex-col w-full h-full">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={12}
+        zoom={14}
         center={center}
         options={options}
         onZoomChanged={() => {

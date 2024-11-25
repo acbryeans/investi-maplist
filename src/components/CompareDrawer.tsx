@@ -78,7 +78,27 @@ export const CompareDrawer = () => {
                     >
                       <X className="h-4 w-4" />
                     </Button>
+                    <img
+                      src={property.image}
+                      alt={property.address}
+                      className="h-40 w-full object-cover rounded-lg"
+                    />
+                    <p className="mt-2 font-medium">{property.address}</p>
                   </div>
+                ))}
+
+                {/* Metrics */}
+                {metrics.map((metric) => (
+                  <React.Fragment key={metric.label}>
+                    <div className="sticky left-0 bg-white z-10 py-4 font-medium">
+                      {metric.label}
+                    </div>
+                    {compareList.map((property) => (
+                      <div key={property.id} className="py-4">
+                        {metric.getValue(property)}
+                      </div>
+                    ))}
+                  </React.Fragment>
                 ))}
               </div>
             </div>

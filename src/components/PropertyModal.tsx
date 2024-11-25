@@ -2,7 +2,8 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/types/property";
-import { BarChart2 } from "lucide-react";
+import { BarChart2, TrendingUp, Activity, LineChart } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface PropertyModalProps {
   property: Property | null;
@@ -10,6 +11,13 @@ interface PropertyModalProps {
   onClose: () => void;
   isMobile?: boolean;
 }
+
+const getMarketMomentumColor = (score: number) => {
+  if (score >= 8) return "text-green-600";
+  if (score >= 6) return "text-green-500";
+  if (score >= 4) return "text-yellow-500";
+  return "text-red-500";
+};
 
 export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyModalProps) => {
   if (!property) return null;

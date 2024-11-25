@@ -33,21 +33,23 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
     styles: [
       {
         featureType: "poi.business",
+        elementType: "labels",
         stylers: [{ visibility: "off" }]
       },
       {
-        featureType: "poi.attraction",
+        featureType: "poi",
+        elementType: "labels",
         stylers: [{ visibility: "off" }]
       },
       {
-        featureType: "poi.medical",
-        stylers: [{ visibility: "off" }]
-      },
-      {
-        featureType: "poi.school",
+        featureType: "transit",
+        elementType: "labels",
         stylers: [{ visibility: "off" }]
       }
-    ]
+    ],
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false
   }), []);
 
   const { isLoaded, loadError } = useLoadScript({

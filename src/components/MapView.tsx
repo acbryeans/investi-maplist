@@ -71,17 +71,17 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
           position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }}
           onCloseClick={() => setSelectedProperty(null)}
         >
-          <div className="min-w-[200px]">
-            <h4 className="font-semibold mb-2">{selectedProperty.address}</h4>
-            <p className="text-primary font-semibold mb-2">
+          <div className="min-w-[180px]">
+            <h4 className="font-semibold mb-1 text-sm">{selectedProperty.address}</h4>
+            <p className="text-primary font-semibold mb-1 text-sm">
               {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedProperty.price)}
             </p>
-            <div className="flex gap-1.5 flex-wrap mb-2">
+            <div className="flex gap-1 flex-wrap mb-1">
               {selectedProperty.tags.map((tag) => (
                 <Badge 
                   key={tag}
                   variant="secondary"
-                  className={`text-xs py-0.5 px-2 ${
+                  className={`text-[10px] py-0 px-1.5 ${
                     tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
                     tag === "Value-Buy" ? "bg-green-100 text-green-800" :
                     tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
@@ -96,7 +96,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
             </div>
             <button 
               onClick={() => onPropertyClick(selectedProperty)}
-              className="w-full bg-primary text-white px-3 py-1.5 rounded-md text-sm hover:bg-primary/90 transition-colors"
+              className="w-full bg-primary text-white px-2.5 py-1 rounded-md text-xs hover:bg-primary/90 transition-colors"
             >
               View Details
             </button>

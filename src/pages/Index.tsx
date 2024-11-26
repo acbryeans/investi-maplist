@@ -68,7 +68,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1800,
     capRate: 7.2,
     cashOnCash: 9.5,
-    tags: ["High Cap Rate", "Below Market"],
+    tags: ["High Cap Rate", "Value-Buy"],
     rentEstimate: 3000,
     repairsEstimate: 5000,
     financing: {
@@ -118,7 +118,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 3200,
     capRate: 4.9,
     cashOnCash: 7.1,
-    tags: ["Luxury", "Appreciation"],
+    tags: ["High Growth Market", "Fix and Flip"],
     rentEstimate: 6000,
     repairsEstimate: 20000,
     financing: {
@@ -168,7 +168,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1200,
     capRate: 8.1,
     cashOnCash: 11.2,
-    tags: ["High Yield", "Starter"],
+    tags: ["High Cap Rate", "Value-Buy"],
     rentEstimate: 2800,
     repairsEstimate: 3000,
     financing: {
@@ -218,7 +218,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 2800,
     capRate: 6.3,
     cashOnCash: 8.9,
-    tags: ["Family Friendly", "Good Schools"],
+    tags: ["High Growth Market", "High Cap Rate"],
     rentEstimate: 3900,
     repairsEstimate: 10000,
     financing: {
@@ -268,7 +268,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1600,
     capRate: 7.5,
     cashOnCash: 10.1,
-    tags: ["Up and Coming", "High Demand"],
+    tags: ["High Growth Market", "Fix and Flip"],
     rentEstimate: 3200,
     repairsEstimate: 4000,
     financing: {
@@ -318,7 +318,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 3500,
     capRate: 5.2,
     cashOnCash: 7.8,
-    tags: ["Premium Location", "Pool"],
+    tags: ["Value-Buy", "Fix and Flip"],
     rentEstimate: 6500,
     repairsEstimate: 25000,
     financing: {
@@ -368,7 +368,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1000,
     capRate: 8.7,
     cashOnCash: 12.3,
-    tags: ["High Cap Rate", "Rental Demand"],
+    tags: ["High Cap Rate", "Value-Buy"],
     rentEstimate: 2000,
     repairsEstimate: 2000,
     financing: {
@@ -418,7 +418,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 2600,
     capRate: 6.1,
     cashOnCash: 8.5,
-    tags: ["Modern", "Energy Efficient"],
+    tags: ["High Growth Market", "High Cap Rate"],
     rentEstimate: 3900,
     repairsEstimate: 12000,
     financing: {

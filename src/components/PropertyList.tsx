@@ -69,8 +69,8 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   );
 
   const renderListViewCard = (property: Property) => (
-    <div className="flex h-[220px]">
-      <div className="w-[320px] relative">
+    <div className="flex h-[223px]">
+      <div className="w-1/3 relative">
         <img 
           src={property.image} 
           alt={property.address}
@@ -80,46 +80,36 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
           {formatPrice(property.price)}
         </div>
       </div>
-      <div className="flex-1 p-6">
-        <div className="flex flex-col h-full">
-          <div>
-            <h3 className="text-2xl font-semibold text-primary mb-2">
-              {property.address}
-            </h3>
-            <div className="flex gap-6 text-sm text-gray-600 mb-4">
-              <span>{property.beds} beds</span>
-              <span>{property.baths} baths</span>
-              <span>{property.sqft.toLocaleString()} sqft</span>
-            </div>
+      <div className="flex-1 p-4">
+        <div className="space-y-3">
+          <div className="text-lg font-medium text-gray-900">
+            {property.address}
           </div>
-
-          <div className="grid grid-cols-2 gap-6 mb-4">
-            <div className="bg-primary-light p-3 rounded-lg">
-              <div className="flex items-center gap-2 mb-1">
-                <BarChart2 className="h-4 w-4 text-primary" />
-                <span className="text-sm text-primary">Cap Rate</span>
-              </div>
-              <div className="text-xl font-semibold text-primary">
+          <div className="flex gap-4 text-sm text-gray-600">
+            <span>{property.beds} beds</span>
+            <span>{property.baths} baths</span>
+            <span>{property.sqft.toLocaleString()} sqft</span>
+          </div>
+          <div className="flex gap-6">
+            <div>
+              <div className="text-sm text-gray-500">Cap Rate</div>
+              <div className="font-semibold text-primary">
                 {formatPercent(property.capRate)}
               </div>
             </div>
-            <div className="bg-primary-light p-3 rounded-lg">
-              <div className="flex items-center gap-2 mb-1">
-                <TrendingUp className="h-4 w-4 text-primary" />
-                <span className="text-sm text-primary">Cash on Cash</span>
-              </div>
-              <div className="text-xl font-semibold text-primary">
+            <div>
+              <div className="text-sm text-gray-500">Cash on Cash</div>
+              <div className="font-semibold text-primary">
                 {formatPercent(property.cashOnCash)}
               </div>
             </div>
           </div>
-
-          <div className="flex gap-2 mt-auto">
+          <div className="flex gap-2">
             {property.tags.map((tag) => (
               <Badge 
                 key={tag}
                 variant="secondary"
-                className="bg-primary-light text-primary hover:bg-primary-light/80"
+                className="bg-gray-100 text-gray-700 hover:bg-gray-200"
               >
                 {tag}
               </Badge>

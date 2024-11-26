@@ -31,12 +31,12 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
       <div className="flex-1 p-4">
         <div className="h-full grid grid-cols-2 gap-4">
           {/* Left Column - Property Details */}
-          <div className="space-y-3">
-            <div>
-              <div className="text-lg font-medium text-gray-900 mb-2">
+          <div className="space-y-2">
+            <div className="space-y-1">
+              <div className="text-lg font-medium text-gray-900">
                 {property.address}
               </div>
-              <div className="flex flex-wrap gap-2 md:gap-4 text-sm text-gray-600">
+              <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-gray-600">
                 <span>{property.beds} beds</span>
                 <span>{property.baths} baths</span>
                 <span>{property.sqft.toLocaleString()} sqft</span>
@@ -90,8 +90,8 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   );
 
   const renderListViewCard = (property: Property) => (
-    <div className={`flex ${isMobile ? 'flex-col h-auto' : 'h-[223px]'}`}>
-      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3'} relative`}>
+    <div className={`flex ${isMobile ? 'flex-col' : 'h-[220px]'}`}>
+      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3 h-full'} relative`}>
         <img 
           src={property.image} 
           alt={property.address}
@@ -103,16 +103,19 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <CompareButton property={property} />
       </div>
       <div className={`${isMobile ? 'w-full' : 'flex-1'} p-4`}>
-        <div className="space-y-3">
-          <div className="text-lg font-medium text-gray-900">
-            {property.address}
+        <div className="space-y-2">
+          <div className="space-y-1">
+            <div className="text-lg font-medium text-gray-900">
+              {property.address}
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-gray-600">
+              <span>{property.beds} beds</span>
+              <span>{property.baths} baths</span>
+              <span>{property.sqft.toLocaleString()} sqft</span>
+            </div>
           </div>
-          <div className="flex gap-4 text-sm text-gray-600">
-            <span>{property.beds} beds</span>
-            <span>{property.baths} baths</span>
-            <span>{property.sqft.toLocaleString()} sqft</span>
-          </div>
-          <div className="flex gap-6">
+          
+          <div className="flex flex-wrap gap-6">
             <div>
               <div className="text-sm text-gray-500">Cap Rate</div>
               <div className="font-semibold text-primary">
@@ -132,6 +135,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
               </div>
             </div>
           </div>
+          
           <div className="flex gap-2 flex-wrap">
             {property.tags.map((tag) => (
               <Badge 

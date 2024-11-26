@@ -18,7 +18,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 2500,
     capRate: 5.8,
     cashOnCash: 8.2,
-    tags: ["High Growth Market", "Value-Buy"],
+    tags: ["High Growth Market"],
     rentEstimate: 4200,
     repairsEstimate: 15000,
     financing: {
@@ -68,7 +68,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1800,
     capRate: 7.2,
     cashOnCash: 9.5,
-    tags: ["High Cap Rate", "Value-Buy"],
+    tags: ["High Cap Rate"],
     rentEstimate: 3000,
     repairsEstimate: 5000,
     financing: {
@@ -118,7 +118,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 3200,
     capRate: 4.9,
     cashOnCash: 7.1,
-    tags: ["High Growth Market", "Fix and Flip"],
+    tags: ["Fix and Flip"],
     rentEstimate: 6000,
     repairsEstimate: 20000,
     financing: {
@@ -168,7 +168,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1200,
     capRate: 8.1,
     cashOnCash: 11.2,
-    tags: ["High Cap Rate", "Value-Buy"],
+    tags: ["Value-Buy"],
     rentEstimate: 2800,
     repairsEstimate: 3000,
     financing: {
@@ -218,7 +218,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 2800,
     capRate: 6.3,
     cashOnCash: 8.9,
-    tags: ["High Growth Market", "High Cap Rate"],
+    tags: ["High Cap Rate"],
     rentEstimate: 3900,
     repairsEstimate: 10000,
     financing: {
@@ -268,7 +268,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1600,
     capRate: 7.5,
     cashOnCash: 10.1,
-    tags: ["High Growth Market", "Fix and Flip"],
+    tags: ["High Growth Market"],
     rentEstimate: 3200,
     repairsEstimate: 4000,
     financing: {
@@ -318,7 +318,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 3500,
     capRate: 5.2,
     cashOnCash: 7.8,
-    tags: ["Value-Buy", "Fix and Flip"],
+    tags: ["Value-Buy"],
     rentEstimate: 6500,
     repairsEstimate: 25000,
     financing: {
@@ -368,7 +368,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 1000,
     capRate: 8.7,
     cashOnCash: 12.3,
-    tags: ["High Cap Rate", "Value-Buy"],
+    tags: ["High Cap Rate"],
     rentEstimate: 2000,
     repairsEstimate: 2000,
     financing: {
@@ -418,7 +418,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 2600,
     capRate: 6.1,
     cashOnCash: 8.5,
-    tags: ["High Growth Market", "High Cap Rate"],
+    tags: ["High Growth Market"],
     rentEstimate: 3900,
     repairsEstimate: 12000,
     financing: {
@@ -468,7 +468,7 @@ const MOCK_PROPERTIES: Property[] = [
     sqft: 3100,
     capRate: 5.5,
     cashOnCash: 7.9,
-    tags: ["Gated Community", "Investment Ready"],
+    tags: ["Value-Buy"],
     rentEstimate: 5000,
     repairsEstimate: 15000,
     financing: {
@@ -539,7 +539,7 @@ const Index = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-[2560px] mx-auto px-4">
+        <div className="w-full max-w-[2560px] mx-auto px-4 h-full overflow-auto">
           <PropertyList 
             properties={MOCK_PROPERTIES} 
             onPropertyClick={setSelectedProperty}

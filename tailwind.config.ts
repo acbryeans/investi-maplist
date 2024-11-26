@@ -41,6 +41,11 @@ export default {
           800: "#1f2937",
           900: "#111827",
         },
+        investment: {
+          high: "#16a34a",
+          medium: "#ca8a04",
+          low: "#dc2626"
+        }
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

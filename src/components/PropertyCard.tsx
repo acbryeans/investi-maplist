@@ -21,6 +21,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
   const monthlyCashFlow = property.rentEstimate - property.financing.monthlyPayment;
   const annualCashFlow = monthlyCashFlow * 12;
   const totalInvestment = property.financing.downPayment + property.repairsEstimate;
+  const grossYield = (property.rentEstimate * 12 / property.price) * 100;
 
   return (
     <Card 
@@ -51,7 +52,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           </div>
         </div>
         
-        <div className="mt-6 grid grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-3 gap-4">
           <div className="bg-green-50 p-3 rounded-lg">
             <div className="flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-green-600" />
@@ -75,10 +76,10 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           <div className="bg-purple-50 p-3 rounded-lg">
             <div className="flex items-center gap-2">
               <BarChart2 className="h-4 w-4 text-purple-600" />
-              <span className="text-sm text-purple-700">Cash on Cash</span>
+              <span className="text-sm text-purple-700">Gross Yield</span>
             </div>
             <div className="text-xl font-semibold text-purple-700">
-              {formatPercent(property.cashOnCash)}
+              {formatPercent(grossYield)}
             </div>
           </div>
           

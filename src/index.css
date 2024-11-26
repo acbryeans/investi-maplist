@@ -37,44 +37,41 @@
   }
 }
 
-.property-card {
-  @apply bg-white rounded-[var(--card-border-radius)] border border-gray-100 overflow-hidden;
-  transition: all 0.2s ease-in-out;
+@layer components {
+  .property-card {
+    @apply bg-white rounded-[var(--card-border-radius)] border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200;
+  }
+
+  .property-card:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .investment-tag {
+    @apply text-xs font-medium px-2 py-1 rounded-full;
+  }
+
+  .investment-tag.high {
+    @apply bg-[#16a34a]/10 text-investment-high;
+  }
+
+  .investment-tag.medium {
+    @apply bg-[#ca8a04]/10 text-investment-medium;
+  }
+
+  .investment-tag.low {
+    @apply bg-[#dc2626]/10 text-investment-low;
+  }
 }
 
-.property-card:hover {
-  box-shadow: var(--card-hover-shadow);
-  transform: translateY(-2px);
-}
-
-.investment-tag {
-  @apply text-xs font-medium px-2 py-1 rounded-full;
-}
-
-.investment-tag.high {
-  @apply bg-investment-high/10 text-investment-high;
-}
-
-.investment-tag.medium {
-  @apply bg-investment-medium/10 text-investment-medium;
-}
-
-.investment-tag.low {
-  @apply bg-investment-low/10 text-investment-low;
-}
-
-/* Add styles for highlighted state */
-[data-state='checked'],
-[data-state='active'],
-.active,
-[data-state='on'],
-button[aria-pressed='true'],
-button[data-state='open'],
-button[variant='default']:not([variant='outline']) {
-  @apply bg-primary text-white !important;
-}
-
-/* Add hover effects for property cards */
-.property-card {
-  @apply shadow-sm hover:shadow-lg transition-all duration-200;
+@layer utilities {
+  [data-state='checked'],
+  [data-state='active'],
+  .active,
+  [data-state='on'],
+  button[aria-pressed='true'],
+  button[data-state='open'],
+  button[variant='default']:not([variant='outline']) {
+    @apply bg-primary text-white !important;
+  }
 }

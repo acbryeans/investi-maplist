@@ -33,13 +33,10 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
           alt={property.address}
           className="h-full w-full object-cover rounded-l-lg"
         />
-        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
-          {formatPrice(property.price/property.sqft)}/sqft
-        </div>
       </div>
       <div className="w-2/3 p-6">
         <div>
-          <h3 className="text-3xl font-semibold text-primary">
+          <h3 className="text-3xl font-semibold text-[#7029D9] mb-2">
             {formatPrice(property.price)}
           </h3>
           <p className="text-lg text-gray-600 mt-2">{property.address}</p>

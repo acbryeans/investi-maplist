@@ -22,8 +22,8 @@ export const StrategyPanel = ({ onFilterChange, isMobile }: StrategyPanelProps) 
         <Button 
           variant="outline" 
           className={`${isMobile 
-            ? 'fixed bottom-0 left-1/2 -translate-x-1/2 h-[77%] rounded-b-none rounded-t-lg border-b-0 z-50 bg-white shadow-lg px-4 py-1.5 mb-0' 
-            : 'fixed right-0 top-1/2 -translate-y-1/2 w-16 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
+            ? 'fixed bottom-0 left-1/2 -translate-x-1/2 w-[77%] rounded-b-none rounded-t-lg border-b-0 z-50 bg-white shadow-lg px-4 py-1.5 mb-0' 
+            : 'fixed right-0 top-1/2 -translate-y-1/2 h-16 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
         >
           {isMobile ? (
             <>
@@ -32,8 +32,8 @@ export const StrategyPanel = ({ onFilterChange, isMobile }: StrategyPanelProps) 
             </>
           ) : (
             <>
-              <ChevronLeft className="h-4 w-4 mr-2" />
-              <span className="rotate-90">Strategy</span>
+              <ChevronLeft className="h-4 w-4 mb-2" />
+              <span className="-rotate-90">Strategy</span>
             </>
           )}
         </Button>

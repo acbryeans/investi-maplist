@@ -539,7 +539,7 @@ const Index = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-[2560px] mx-auto px-4">
+        <div className="w-full max-w-[2560px] mx-auto px-4 h-full overflow-auto">
           <PropertyList 
             properties={MOCK_PROPERTIES} 
             onPropertyClick={setSelectedProperty}

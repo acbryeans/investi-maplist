@@ -23,85 +23,113 @@ interface FilterBarProps {
 export const FilterBar = ({ onFilterChange }: FilterBarProps) => {
   const [investmentType, setInvestmentType] = useState<'cash' | 'downpayment'>('cash');
   const [investmentAmount, setInvestmentAmount] = useState(50000);
-  const [downPaymentPercent, setDownPaymentPercent] = useState(20);
+  const [downPaymentPercent, setDownPaymentPercent] = useState(25);
+  const [customAmount, setCustomAmount] = useState('');
+  const [customPercent, setCustomPercent] = useState('');
+
+  const handleCustomAmountChange = (value: string) => {
+    const numValue = parseInt(value.replace(/[^0-9]/g, ''));
+    if (!isNaN(numValue)) {
+      setInvestmentAmount(numValue);
+      setCustomAmount(value);
+    }
+  };
+
+  const handleCustomPercentChange = (value: string) => {
+    const numValue = parseInt(value.replace(/[^0-9]/g, ''));
+    if (!isNaN(numValue) && numValue >= 1 && numValue <= 100) {
+      setDownPaymentPercent(numValue);
+      setCustomPercent(value);
+    }
+  };
 
   return (
     <div className="w-full bg-white border-b">
       <div className="max-w-[2560px] mx-auto px-4">
         <div className="flex items-center gap-2 h-14">
-          <Select value={investmentType} onValueChange={(value: 'cash' | 'downpayment') => setInvestmentType(value)}>
-            <SelectTrigger className="w-[180px] h-9">
+          <div className="flex items-center gap-2 bg-gray-50 p-1 rounded-lg">
+            <button
+              onClick={() => setInvestmentType('cash')}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                investmentType === 'cash' 
+                  ? 'bg-white shadow-sm text-primary' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Cash
+            </button>
+            <button
+              onClick={() => setInvestmentType('downpayment')}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                investmentType === 'downpayment' 
+                  ? 'bg-white shadow-sm text-primary' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Down Payment
+            </button>
+          </div>
+
+          <Select
+            value={investmentType === 'cash' ? investmentAmount.toString() : downPaymentPercent.toString()}
+            onValueChange={(value) => {
+              if (investmentType === 'cash') {
+                setInvestmentAmount(parseInt(value));
+                setCustomAmount('');
+              } else {
+                setDownPaymentPercent(parseInt(value));
+                setCustomPercent('');
+              }
+            }}
+          >
+            <SelectTrigger className="w-[180px] h-9 bg-white">
               <SelectValue>
                 {investmentType === 'cash' ? (
-                  <div className="flex flex-col">
-                    <span className="text-xs text-gray-500">Investable Cash</span>
-                    <span className="font-medium">${investmentAmount.toLocaleString()}</span>
-                  </div>
+                  <span className="font-medium">${investmentAmount.toLocaleString()}</span>
                 ) : (
-                  <div className="flex flex-col">
-                    <span className="text-xs text-gray-500">Down Payment</span>
-                    <span className="font-medium">{downPaymentPercent}%</span>
-                  </div>
+                  <span className="font-medium">{downPaymentPercent}%</span>
                 )}
               </SelectValue>
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="cash">
-                <div className="flex flex-col">
-                  <span className="font-medium">Investable Cash</span>
-                  <span className="text-sm text-gray-500">${investmentAmount.toLocaleString()}</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="downpayment">
-                <div className="flex flex-col">
-                  <span className="font-medium">Down Payment</span>
-                  <span className="text-sm text-gray-500">{downPaymentPercent}%</span>
-                </div>
-              </SelectItem>
+            <SelectContent className="bg-white">
+              {investmentType === 'cash' ? (
+                <>
+                  <SelectItem value="50000">$50,000</SelectItem>
+                  <SelectItem value="100000">$100,000</SelectItem>
+                  <SelectItem value="150000">$150,000</SelectItem>
+                  <SelectItem value="200000">$200,000</SelectItem>
+                  <SelectItem value="250000">$250,000</SelectItem>
+                  <SelectItem value="custom">
+                    <Input
+                      type="text"
+                      placeholder="Custom amount"
+                      value={customAmount}
+                      onChange={(e) => handleCustomAmountChange(e.target.value)}
+                      className="w-full mt-1"
+                    />
+                  </SelectItem>
+                </>
+              ) : (
+                <>
+                  <SelectItem value="20">20%</SelectItem>
+                  <SelectItem value="25">25%</SelectItem>
+                  <SelectItem value="30">30%</SelectItem>
+                  <SelectItem value="35">35%</SelectItem>
+                  <SelectItem value="40">40%</SelectItem>
+                  <SelectItem value="custom">
+                    <Input
+                      type="text"
+                      placeholder="Custom percentage"
+                      value={customPercent}
+                      onChange={(e) => handleCustomPercentChange(e.target.value)}
+                      className="w-full mt-1"
+                      max="100"
+                    />
+                  </SelectItem>
+                </>
+              )}
             </SelectContent>
           </Select>
-
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" className="h-9">
-                {investmentType === 'cash' ? 'Adjust Amount' : 'Adjust Percentage'}
-                <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="space-y-4 p-2">
-                {investmentType === 'cash' ? (
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Investment Amount</span>
-                      <span>${investmentAmount.toLocaleString()}</span>
-                    </div>
-                    <Slider
-                      value={[investmentAmount]}
-                      min={10000}
-                      max={1000000}
-                      step={5000}
-                      onValueChange={([value]) => setInvestmentAmount(value)}
-                    />
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Down Payment Percentage</span>
-                      <span>{downPaymentPercent}%</span>
-                    </div>
-                    <Slider
-                      value={[downPaymentPercent]}
-                      min={5}
-                      max={100}
-                      step={5}
-                      onValueChange={([value]) => setDownPaymentPercent(value)}
-                    />
-                  </div>
-                )}
-              </div>
-            </PopoverContent>
-          </Popover>
 
           <Popover>
             <PopoverTrigger asChild>

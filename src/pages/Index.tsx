@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
 import { MapView } from "@/components/MapView";
-import { FilterPanel } from "@/components/FilterPanel";
+import { StrategyPanel } from "@/components/StrategyPanel";
 import { Property } from "@/types/property";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Layout } from "@/components/Layout";
@@ -549,7 +549,7 @@ const Index = () => {
         </div>
       )}
 
-      <FilterPanel 
+      <StrategyPanel 
         onFilterChange={(filters) => {
           console.log(filters);
         }}

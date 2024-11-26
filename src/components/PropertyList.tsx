@@ -18,7 +18,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
 
   const renderMapViewCard = (property: Property) => (
     <div className="flex h-[180px]">
-      <div className="w-[560px] relative">
+      <div className="w-1/3 relative">
         <img 
           src={property.image} 
           alt={property.address}

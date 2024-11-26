@@ -29,9 +29,9 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         </div>
       </div>
       <div className="flex-1 p-4">
-        <div className="h-full grid grid-cols-2 gap-4">
+        <div className="h-full grid grid-cols-12 gap-4">
           {/* Left Column - Property Details */}
-          <div className="space-y-2">
+          <div className="col-span-8 space-y-2">
             <div className="space-y-1">
               <div className="text-lg font-medium text-gray-900">
                 {property.address}
@@ -64,7 +64,7 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
           </div>
 
           {/* Right Column - Investment Metrics */}
-          <div className="space-y-2">
+          <div className="col-span-4 space-y-2">
             <div>
               <div className="text-sm text-gray-500">Cap Rate</div>
               <div className="font-semibold text-primary">
@@ -100,7 +100,6 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-primary">
           {formatPrice(property.price)}
         </div>
-        <CompareButton property={property} />
       </div>
       <div className={`${isMobile ? 'w-full' : 'flex-1'} p-4`}>
         <div className="space-y-2">

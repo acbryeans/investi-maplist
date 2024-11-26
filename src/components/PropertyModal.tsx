@@ -79,7 +79,7 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 </div>
                 
                 {/* Investment metrics */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-3 gap-4 mb-6">
                   <div className="p-4 bg-primary-light rounded-lg">
                     <div className="text-sm text-primary-dark">Cap Rate</div>
                     <div className="text-2xl font-semibold text-primary">
@@ -90,6 +90,12 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                     <div className="text-sm text-primary-dark">Cash on Cash</div>
                     <div className="text-2xl font-semibold text-primary">
                       {formatPercent(property.cashOnCash)}
+                    </div>
+                  </div>
+                  <div className="p-4 bg-primary-light rounded-lg">
+                    <div className="text-sm text-primary-dark">Gross Yield</div>
+                    <div className="text-2xl font-semibold text-primary">
+                      {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
                     </div>
                   </div>
                 </div>
@@ -377,7 +383,7 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="p-4 bg-primary-light rounded-lg">
                   <div className="text-sm text-primary-dark">Cap Rate</div>
                   <div className="text-2xl font-semibold text-primary">
@@ -388,6 +394,12 @@ export const PropertyModal = ({ property, isOpen, onClose, isMobile }: PropertyM
                   <div className="text-sm text-primary-dark">Cash on Cash</div>
                   <div className="text-2xl font-semibold text-primary">
                     {formatPercent(property.cashOnCash)}
+                  </div>
+                </div>
+                <div className="p-4 bg-primary-light rounded-lg">
+                  <div className="text-sm text-primary-dark">Gross Yield</div>
+                  <div className="text-2xl font-semibold text-primary">
+                    {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
                   </div>
                 </div>
               </div>

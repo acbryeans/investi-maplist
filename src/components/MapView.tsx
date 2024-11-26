@@ -180,6 +180,12 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
                       {selectedProperty.cashOnCash.toFixed(1)}%
                     </div>
                   </div>
+                  <div>
+                    <div className="text-xs text-gray-500">Gross Yield</div>
+                    <div className="font-semibold text-primary">
+                      {((selectedProperty.rentEstimate * 12 / selectedProperty.price) * 100).toFixed(1)}%
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

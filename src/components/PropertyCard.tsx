@@ -97,13 +97,7 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
             <Badge 
               key={tag}
               variant="secondary"
-              className={`text-xs py-1 ${
-                tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                ""
-              }`}
+              className="text-xs py-1 bg-purple-100 text-purple-800"
             >
               {tag}
             </Badge>

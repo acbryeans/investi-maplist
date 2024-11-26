@@ -29,58 +29,60 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         </div>
       </div>
       <div className="flex-1 p-4">
-        <div className="h-full flex flex-col md:grid md:grid-cols-2 gap-4">
+        <div className="h-full grid grid-cols-2 gap-4">
           {/* Left Column - Property Details */}
-          <div className="space-y-2 md:space-y-3">
-            <div className="text-lg font-medium text-gray-900">
-              {property.address}
+          <div className="space-y-3">
+            <div>
+              <div className="text-lg font-medium text-gray-900 mb-2">
+                {property.address}
+              </div>
+              <div className="flex flex-wrap gap-2 md:gap-4 text-sm text-gray-600">
+                <span>{property.beds} beds</span>
+                <span>{property.baths} baths</span>
+                <span>{property.sqft.toLocaleString()} sqft</span>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2 md:gap-4 text-sm text-gray-600">
-              <span>{property.beds} beds</span>
-              <span>{property.baths} baths</span>
-              <span>{property.sqft.toLocaleString()} sqft</span>
+
+            {/* Tags moved under property details */}
+            <div className="flex gap-1.5 flex-wrap">
+              {property.tags.map((tag) => (
+                <Badge 
+                  key={tag}
+                  variant="secondary"
+                  className={`text-xs md:text-sm py-0.5 md:py-1 ${
+                    tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
+                    tag === "Value-Buy" ? "bg-green-100 text-green-800" :
+                    tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
+                    tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
+                    ""
+                  }`}
+                >
+                  {tag}
+                </Badge>
+              ))}
             </div>
           </div>
 
           {/* Right Column - Investment Metrics */}
-          <div className="flex gap-4 md:flex-col md:gap-2">
+          <div className="space-y-2">
             <div>
-              <div className="text-xs md:text-sm text-gray-500">Cap Rate</div>
+              <div className="text-sm text-gray-500">Cap Rate</div>
               <div className="font-semibold text-primary">
                 {formatPercent(property.capRate)}
               </div>
             </div>
             <div>
-              <div className="text-xs md:text-sm text-gray-500">Cash on Cash</div>
+              <div className="text-sm text-gray-500">Cash on Cash</div>
               <div className="font-semibold text-primary">
                 {formatPercent(property.cashOnCash)}
               </div>
             </div>
             <div>
-              <div className="text-xs md:text-sm text-gray-500">Gross Yield</div>
+              <div className="text-sm text-gray-500">Gross Yield</div>
               <div className="font-semibold text-primary">
                 {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
               </div>
             </div>
-          </div>
-
-          {/* Tags */}
-          <div className="mt-auto md:col-span-2 flex gap-1.5 flex-wrap">
-            {property.tags.map((tag) => (
-              <Badge 
-                key={tag}
-                variant="secondary"
-                className={`text-xs md:text-sm py-0.5 md:py-1 ${
-                  tag === "High Growth Market" ? "bg-blue-100 text-blue-800" :
-                  tag === "Value-Buy" ? "bg-green-100 text-green-800" :
-                  tag === "High Cap Rate" ? "bg-purple-100 text-purple-800" :
-                  tag === "Fix and Flip" ? "bg-orange-100 text-orange-800" :
-                  ""
-                }`}
-              >
-                {tag}
-              </Badge>
-            ))}
           </div>
         </div>
       </div>
@@ -88,8 +90,8 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   );
 
   const renderListViewCard = (property: Property) => (
-    <div className="flex h-[223px]">
-      <div className="w-1/3 relative">
+    <div className={`flex ${isMobile ? 'flex-col h-auto' : 'h-[223px]'}`}>
+      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3'} relative`}>
         <img 
           src={property.image} 
           alt={property.address}
@@ -98,8 +100,9 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-primary">
           {formatPrice(property.price)}
         </div>
+        <CompareButton property={property} />
       </div>
-      <div className="flex-1 p-4">
+      <div className={`${isMobile ? 'w-full' : 'flex-1'} p-4`}>
         <div className="space-y-3">
           <div className="text-lg font-medium text-gray-900">
             {property.address}
@@ -122,8 +125,14 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 {formatPercent(property.cashOnCash)}
               </div>
             </div>
+            <div>
+              <div className="text-sm text-gray-500">Gross Yield</div>
+              <div className="font-semibold text-primary">
+                {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
+              </div>
+            </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {property.tags.map((tag) => (
               <Badge 
                 key={tag}

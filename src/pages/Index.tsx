@@ -523,7 +523,7 @@ const Index = () => {
     <Layout view={view} onViewChange={setView} isMobile={isMobile}>
       {view === "map" ? (
         <div className="flex h-full w-full">
-          <div className={`${isMobile ? 'hidden' : 'w-[792px] min-w-[792px] border-r'}`}>
+          <div className={`${isMobile ? 'hidden' : 'w-[600px] min-w-[600px] border-r'}`}>
             <PropertyList 
               properties={MOCK_PROPERTIES} 
               onPropertyClick={setSelectedProperty}

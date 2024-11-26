@@ -1,3 +1,4 @@
+export * from './CompareButton';
 export * from './PropertyList';
 export * from './PropertyModal';
 export * from './MapView';

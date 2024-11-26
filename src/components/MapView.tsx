@@ -58,13 +58,11 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   });
 
   const getMarkerSize = (zoomLevel: number) => {
-    // Increase base text size
     const baseSize = Math.max(12, Math.min(16, zoomLevel * 1.2));
     return baseSize;
   };
 
   const getIconSize = (zoomLevel: number) => {
-    // Increase base marker size
     const baseSize = Math.max(30, Math.min(45, zoomLevel * 2.5));
     return baseSize;
   };
@@ -77,7 +75,6 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
   };
 
   const createCustomMarkerIcon = (price: number, size: number) => {
-    // Create a pill-shaped marker with the price
     const markerPrice = formatMarkerPrice(price);
     const width = Math.max(markerPrice.length * 8 + 16, 40); // Dynamic width based on text length
     
@@ -112,7 +109,6 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
         options={options}
         onZoomChanged={() => {
           const newZoom = map?.getZoom() || 12;
-          // Force re-render of markers when zoom changes
           setZoom(newZoom);
         }}
         onLoad={map => setMap(map)}

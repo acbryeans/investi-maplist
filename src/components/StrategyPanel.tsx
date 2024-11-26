@@ -23,7 +23,7 @@ export const StrategyPanel = ({ onFilterChange, isMobile }: StrategyPanelProps) 
           variant="outline" 
           className={`${isMobile 
             ? 'fixed bottom-0 left-1/2 -translate-x-1/2 w-[54%] rounded-b-none rounded-t-lg border-b-0 z-50 bg-white shadow-lg px-4 py-1.5 mb-0' 
-            : 'fixed right-0 top-1/2 -translate-y-1/2 h-10 w-24 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
+            : 'fixed right-0 top-1/2 -translate-y-1/2 h-24 w-10 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
         >
           {isMobile ? (
             <>

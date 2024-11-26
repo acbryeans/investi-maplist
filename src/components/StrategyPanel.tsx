@@ -4,12 +4,12 @@ import { Slider } from "@/components/ui/slider";
 import { ChevronDown, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
-interface FilterPanelProps {
+interface StrategyPanelProps {
   onFilterChange?: (filters: any) => void;
   isMobile?: boolean;
 }
 
-export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
+export const StrategyPanel = ({ onFilterChange, isMobile }: StrategyPanelProps) => {
   const [strategy, setStrategy] = useState<'cashflow' | 'appreciation' | 'custom'>('custom');
   const [investmentType, setInvestmentType] = useState<'cash' | 'downpayment'>('cash');
   
@@ -19,18 +19,18 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
         <Button 
           variant="outline" 
           className={`${isMobile 
-            ? 'fixed top-0 left-1/2 -translate-x-1/2 rounded-t-none rounded-b-lg border-t-0 z-50 bg-white shadow-lg px-4 py-2' 
-            : 'fixed right-0 top-1/2 -translate-y-1/2 h-32 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
+            ? 'fixed top-0 left-1/2 -translate-x-1/2 w-[70%] rounded-t-none rounded-b-lg border-t-0 z-50 bg-white shadow-lg px-4 py-2' 
+            : 'fixed right-0 top-1/2 -translate-y-1/2 h-24 px-2 rounded-l-lg rounded-r-none border-r-0 z-50 bg-white shadow-lg'}`}
         >
           {isMobile ? (
             <>
               <ChevronDown className="h-4 w-4 mr-2" />
-              <span>Filters</span>
+              <span>Strategy</span>
             </>
           ) : (
             <>
               <ChevronLeft className="h-4 w-4 mr-2" />
-              <span className="rotate-90">Filters</span>
+              <span className="rotate-90">Strategy</span>
             </>
           )}
         </Button>
@@ -39,37 +39,40 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
         side={isMobile ? "top" : "right"} 
         className={`w-full ${isMobile ? 'h-[80vh]' : 'sm:w-[540px]'} overflow-y-auto`}
       >
-        <div className="h-full flex flex-col gap-6 pt-6">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Investment Strategy</h3>
-            <div className="flex gap-2">
-              <Button 
-                variant={strategy === 'cashflow' ? 'purple' : 'outline'}
-                onClick={() => setStrategy('cashflow')}
-                className="flex-1"
-              >
-                Cash-Flow
-              </Button>
-              <Button 
-                variant={strategy === 'appreciation' ? 'purple' : 'outline'}
-                onClick={() => setStrategy('appreciation')}
-                className="flex-1"
-              >
-                Appreciation
-              </Button>
-              <Button 
-                variant={strategy === 'custom' ? 'purple' : 'outline'}
-                onClick={() => setStrategy('custom')}
-                className="flex-1"
-              >
-                Custom
-              </Button>
+        <div className="h-full flex flex-col gap-8 pt-6">
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Design Your Strategy</h2>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Investment Strategy</h3>
+              <div className="flex gap-2">
+                <Button 
+                  variant={strategy === 'cashflow' ? 'purple' : 'outline'}
+                  onClick={() => setStrategy('cashflow')}
+                  className="flex-1"
+                >
+                  Cash-Flow
+                </Button>
+                <Button 
+                  variant={strategy === 'appreciation' ? 'purple' : 'outline'}
+                  onClick={() => setStrategy('appreciation')}
+                  className="flex-1"
+                >
+                  Appreciation
+                </Button>
+                <Button 
+                  variant={strategy === 'custom' ? 'purple' : 'outline'}
+                  onClick={() => setStrategy('custom')}
+                  className="flex-1"
+                >
+                  Custom
+                </Button>
+              </div>
             </div>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Investment Parameters</h3>
+              <h3 className="text-lg font-semibold">How much are you looking to invest?</h3>
               <div className="space-y-4">
                 <div className="flex gap-4">
                   <Button 
@@ -102,7 +105,7 @@ export const FilterPanel = ({ onFilterChange, isMobile }: FilterPanelProps) => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Property Filters</h3>
+              <h3 className="text-lg font-semibold">Strategy Targets</h3>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm">Price Range</label>

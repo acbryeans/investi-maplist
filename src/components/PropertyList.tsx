@@ -90,8 +90,8 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   );
 
   const renderListViewCard = (property: Property) => (
-    <div className="flex h-[223px]">
-      <div className="w-1/3 relative">
+    <div className={`flex ${isMobile ? 'flex-col h-auto' : 'h-[223px]'}`}>
+      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3'} relative`}>
         <img 
           src={property.image} 
           alt={property.address}
@@ -100,8 +100,9 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
         <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-primary">
           {formatPrice(property.price)}
         </div>
+        <CompareButton property={property} />
       </div>
-      <div className="flex-1 p-4">
+      <div className={`${isMobile ? 'w-full' : 'flex-1'} p-4`}>
         <div className="space-y-3">
           <div className="text-lg font-medium text-gray-900">
             {property.address}
@@ -124,8 +125,14 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
                 {formatPercent(property.cashOnCash)}
               </div>
             </div>
+            <div>
+              <div className="text-sm text-gray-500">Gross Yield</div>
+              <div className="font-semibold text-primary">
+                {formatPercent((property.rentEstimate * 12 / property.price) * 100)}
+              </div>
+            </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {property.tags.map((tag) => (
               <Badge 
                 key={tag}

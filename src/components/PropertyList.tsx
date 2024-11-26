@@ -90,8 +90,8 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
   );
 
   const renderListViewCard = (property: Property) => (
-    <div className={`flex ${isMobile ? 'flex-col h-auto' : 'h-[223px]'}`}>
-      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3'} relative`}>
+    <div className={`flex ${isMobile ? 'flex-col' : 'h-[220px]'}`}>
+      <div className={`${isMobile ? 'w-full h-[200px]' : 'w-1/3 h-full'} relative`}>
         <img 
           src={property.image} 
           alt={property.address}
@@ -107,12 +107,12 @@ export const PropertyList = ({ properties, onPropertyClick, view, isMobile }: Pr
           <div className="text-lg font-medium text-gray-900">
             {property.address}
           </div>
-          <div className="flex gap-4 text-sm text-gray-600">
+          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
             <span>{property.beds} beds</span>
             <span>{property.baths} baths</span>
             <span>{property.sqft.toLocaleString()} sqft</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <div>
               <div className="text-sm text-gray-500">Cap Rate</div>
               <div className="font-semibold text-primary">

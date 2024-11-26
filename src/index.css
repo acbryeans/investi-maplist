@@ -52,15 +52,15 @@
   }
 
   .investment-tag.high {
-    @apply bg-[#16a34a]/10 text-investment-high;
+    @apply bg-investment-high-light text-investment-high;
   }
 
   .investment-tag.medium {
-    @apply bg-[#ca8a04]/10 text-investment-medium;
+    @apply bg-investment-medium-light text-investment-medium;
   }
 
   .investment-tag.low {
-    @apply bg-[#dc2626]/10 text-investment-low;
+    @apply bg-investment-low-light text-investment-low;
   }
 }
 

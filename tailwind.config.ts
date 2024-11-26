@@ -42,9 +42,18 @@ export default {
           900: "#111827",
         },
         investment: {
-          high: "#16a34a",
-          medium: "#ca8a04",
-          low: "#dc2626"
+          high: {
+            DEFAULT: "#16a34a",
+            light: "#dcfce7",
+          },
+          medium: {
+            DEFAULT: "#ca8a04",
+            light: "#fef9c3",
+          },
+          low: {
+            DEFAULT: "#dc2626",
+            light: "#fee2e2",
+          }
         }
       },
       fontFamily: {

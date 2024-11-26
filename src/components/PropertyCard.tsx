@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BarChart2, TrendingUp, DollarSign, Wrench } from "lucide-react";
 import type { Property } from "@/types/property";
-import { CompareButton } from "@/components/CompareButton";
 
 interface PropertyCardProps {
   property: Property;
@@ -28,7 +27,6 @@ export const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
       className="property-card flex h-[420px] animate-fade-in relative"
       onClick={() => onClick(property.id)}
     >
-      <CompareButton property={property} />
       <div className="w-1/3">
         <img 
           src={property.image} 

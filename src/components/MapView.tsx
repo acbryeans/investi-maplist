@@ -18,7 +18,7 @@ export const MapView = ({ isMobile, properties, onPropertyClick }: MapViewProps)
 
   const mapContainerStyle = useMemo(() => ({
     width: '100%',
-    height: isMobile ? 'calc(100% - 80px)' : 'calc(100vh - 10rem)', // Adjusted to make room for title
+    height: '100%',
     borderRadius: isMobile ? '0' : '0.5rem'
   }), [isMobile]);
 

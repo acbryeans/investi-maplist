@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ViewToggle } from "@/components/ViewToggle";
 import { PropertyList } from "@/components/PropertyList";
 import { PropertyModal } from "@/components/PropertyModal";
@@ -521,9 +521,9 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col">
-      <header className="bg-white border-b z-10 h-14">
-        <div className="flex items-center h-full px-4">
+    <div className="h-screen w-screen flex flex-col overflow-hidden">
+      <header className="bg-white border-b z-10 h-14 flex-shrink-0">
+        <div className="flex items-center h-full px-4 max-w-[2560px] mx-auto w-full">
           <h1 className="text-2xl font-bold text-primary">Picket</h1>
           <div className="flex-1 px-4">
             <SearchBar isMobile={isMobile} />
@@ -532,17 +532,17 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="flex-1 flex">
+      <main className="flex-1 flex min-h-0 w-full">
         {view === "map" ? (
-          <div className="flex h-full">
-            <div className={`${isMobile ? 'hidden' : 'w-[520px] border-r'}`}>
+          <div className="flex h-full w-full">
+            <div className={`${isMobile ? 'hidden' : 'w-[520px] min-w-[520px] border-r'}`}>
               <PropertyList 
                 properties={MOCK_PROPERTIES} 
                 onPropertyClick={setSelectedProperty}
                 view={view}
               />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <MapView
                 isMobile={isMobile}
                 properties={MOCK_PROPERTIES}
@@ -551,7 +551,7 @@ const Index = () => {
             </div>
           </div>
         ) : (
-          <div className="w-full">
+          <div className="w-full max-w-[2560px] mx-auto px-4">
             <PropertyList 
               properties={MOCK_PROPERTIES} 
               onPropertyClick={setSelectedProperty}
@@ -582,4 +582,3 @@ const Index = () => {
 };
 
 export default Index;
-

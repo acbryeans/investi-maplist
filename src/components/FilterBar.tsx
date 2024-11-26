@@ -24,50 +24,64 @@ export const FilterBar = ({ onFilterChange }: FilterBarProps) => {
   const [investmentType, setInvestmentType] = useState<'cash' | 'downpayment'>('cash');
   const [investmentAmount, setInvestmentAmount] = useState(50000);
   const [downPaymentPercent, setDownPaymentPercent] = useState(25);
+  const [priceRange, setPriceRange] = useState<[number, number]>([200000, 800000]);
   const [customAmount, setCustomAmount] = useState('');
   const [customPercent, setCustomPercent] = useState('');
+
+  const handleInvestmentAmountChange = (value: string) => {
+    const numValue = parseInt(value.replace(/[^0-9]/g, ''));
+    if (!isNaN(numValue)) {
+      setInvestmentAmount(numValue);
+    }
+  };
+
+  const handleDownPaymentChange = (value: string) => {
+    const numValue = parseInt(value.replace(/[^0-9]/g, ''));
+    if (!isNaN(numValue) && numValue >= 1 && numValue <= 100) {
+      setDownPaymentPercent(numValue);
+    }
+  };
 
   const handleCustomAmountChange = (value: string) => {
     const numValue = parseInt(value.replace(/[^0-9]/g, ''));
     if (!isNaN(numValue)) {
-      setInvestmentAmount(numValue);
-      setCustomAmount(value);
+      setCustomAmount(numValue.toString());
     }
   };
 
   const handleCustomPercentChange = (value: string) => {
     const numValue = parseInt(value.replace(/[^0-9]/g, ''));
     if (!isNaN(numValue) && numValue >= 1 && numValue <= 100) {
-      setDownPaymentPercent(numValue);
-      setCustomPercent(value);
+      setCustomPercent(numValue.toString());
     }
   };
 
   return (
     <div className="w-full bg-white border-b">
       <div className="max-w-[2560px] mx-auto px-4">
-        <div className="flex items-center gap-2 h-14">
-          <div className="flex items-center gap-2 bg-gray-50 p-1 rounded-lg">
-            <button
-              onClick={() => setInvestmentType('cash')}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                investmentType === 'cash' 
-                  ? 'bg-white shadow-sm text-primary' 
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Cash
-            </button>
-            <button
-              onClick={() => setInvestmentType('downpayment')}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                investmentType === 'downpayment' 
-                  ? 'bg-white shadow-sm text-primary' 
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Down Payment
-            </button>
+        <div className="flex items-center gap-4 h-14">
+          <div className="space-y-1">
+            <div className="text-sm font-medium text-gray-700">How much do you want to invest?</div>
+            <div className="flex items-center gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  checked={investmentType === 'cash'}
+                  onChange={() => setInvestmentType('cash')}
+                  className="text-primary"
+                />
+                <span className="text-sm">Total Investable Cash</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  checked={investmentType === 'downpayment'}
+                  onChange={() => setInvestmentType('downpayment')}
+                  className="text-primary"
+                />
+                <span className="text-sm">Down Payment %</span>
+              </label>
+            </div>
           </div>
 
           <Select
@@ -134,15 +148,25 @@ export const FilterBar = ({ onFilterChange }: FilterBarProps) => {
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="h-9">
-                Price
+                Price Range
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="space-y-4 p-2">
-                <div className="flex gap-2">
-                  <Input placeholder="Min" type="number" className="w-full" />
-                  <Input placeholder="Max" type="number" className="w-full" />
+            <PopoverContent className="w-80 bg-white">
+              <div className="space-y-4 p-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>${priceRange[0].toLocaleString()}</span>
+                    <span>${priceRange[1].toLocaleString()}</span>
+                  </div>
+                  <Slider
+                    value={priceRange}
+                    min={0}
+                    max={2000000}
+                    step={10000}
+                    onValueChange={(value) => setPriceRange(value as [number, number])}
+                    className="mt-2"
+                  />
                 </div>
               </div>
             </PopoverContent>
